@@ -10,6 +10,11 @@
       "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
+    },
+    "./lib": {
+      "types": "./src/lib/index.ts",
+      "import": "./src/lib/index.ts",
+      "require": "./src/lib/index.ts"
     }
   },
   "main": "./dist/module.cjs",
@@ -29,7 +34,8 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.16.0"
+    "@nuxt/kit": "^3.16.0",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "^2.2.1",

@@ -17,4 +17,8 @@ export default createConfigForNuxt({
 })
   .append(
     // your custom flat config here...
-  )
+  ).override('nuxt/typescript', {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'warn'
+    }
+  })
