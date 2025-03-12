@@ -35,6 +35,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.16.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
@@ -47,6 +49,7 @@
     "changelogen": "^0.6.1",
     "eslint": "^9.22.0",
     "nuxt": "^3.16.0",
+    "prettier": "^3.5.3",
     "typescript": "~5.8.2",
     "vitest": "^3.0.8",
     "vue-tsc": "^2.2.8"

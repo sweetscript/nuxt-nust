@@ -1,4 +1,4 @@
-import type { Event } from '../../../../../nust-module/src/lib'
+import type { H3Event } from '../../../../../nust-module/src/lib'
 import { Controller, Get, Patch, Post, Delete } from '../../../../../nust-module/src/lib'
 
 @Controller('dog')
@@ -14,19 +14,19 @@ export class DogController {
   }
 
   @Get(':id')
-  findOne(event: Event) {
+  findOne(event: H3Event) {
     const id = getRouterParam(event, 'id')
     return `this action return a dog with ID:${id}`
   }
 
   @Patch(':id')
-  update(event: Event) {
+  update(event: H3Event) {
     const id = getRouterParam(event, 'id')
     return `this action updates a dog with ID:${id}`
   }
 
   @Delete(':id')
-  delete(event: Event) {
+  delete(event: H3Event) {
     const id = getRouterParam(event, 'id')
     return `this action deletes a dog with ID:${id}`
   }

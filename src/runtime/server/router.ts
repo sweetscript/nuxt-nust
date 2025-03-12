@@ -1,35 +1,55 @@
-import { createRouter, defineEventHandler, useBase } from 'h3'
-import type { NustHandler } from '../../lib'
+import 'reflect-metadata';
+import {
+  createRouter,
+  defineEventHandler,
+  useBase,
+} from 'h3';
+import type { NustHandler } from '../../lib';
 
 // @ts-expect-error
-const config = useRuntimeConfig()
+const config = useRuntimeConfig();
 
-const handlers: NustHandler[] | undefined = config.nust?.handlers
+const handlers: NustHandler[] | undefined =
+  config.nust?.handlers;
 
-const router = createRouter()
+const router = createRouter();
 
 if (handlers) {
   for (const handler of handlers) {
     if (!handler.controllerKey) {
-      continue
+      continue;
     }
 
     router.add(
       handler.route,
       defineEventHandler(async (event) => {
-        // @ts-expect-error
-        const { default: controllers } = await import('~/server/nust/index')
-        const Controller = (controllers as any)[handler.controllerKey as any]
+        const { default: controllers } = await import(
+          // @ts-expect-error
+          '~/server/nust/index'
+        );
+
+        const Controller = (controllers as any)[
+          handler.controllerKey as any
+        ];
+
         if (Controller) {
-          return new Controller()[handler.fn](event)
+          return new Controller()[handler.fn](event);
         }
       }),
-      handler.method === 'all' ? undefined : (handler.method as any),
-    )
-    if(config.nust.debug) {
-      console.log('route added', handler.route, handler.method, handler.fn)
+      handler.method === 'all'
+        ? undefined
+        : (handler.method as any),
+    );
+    if (config.nust.debug) {
+      console.log(
+        'Nust route added: ',
+        handler.method.toUpperCase(),
+        handler.route,
+        '->',
+        handler.fn,
+      );
     }
   }
 }
 
-export default useBase('/api', router.handler)
+export default useBase('/api', router.handler);
