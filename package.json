@@ -7,20 +7,20 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
-    },
-    "./lib": {
       "types": "./src/lib/index.ts",
-      "import": "./src/lib/index.ts",
-      "require": "./src/lib/index.ts"
+      "import": "./src/lib/index.ts"
+    },
+    "./module": {
+      "types": "./src/module.ts",
+      "import": "./src/module.ts",
+      "require": "./src/module.ts"
     }
   },
-  "main": "./dist/module.cjs",
-  "types": "./dist/types.d.ts",
+  "main": "./src/lib/index.ts",
+  "types": "./src/lib/index.ts",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "prepack": "nuxt-module-build build",

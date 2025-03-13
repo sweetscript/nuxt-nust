@@ -49,6 +49,23 @@ export default defineNuxtModule<ModuleOptions>({
       //     target: 'esnext'
       //   }
       // },
+
+      config.esbuild = {
+        ...config.esbuild,
+        options: {
+          ...config.esbuild?.options,
+          tsconfigRaw: {
+            ...((config.esbuild?.options?.tsconfigRaw ?? {}) as any),
+            compilerOptions: {
+              ...(((config.esbuild?.options?.tsconfigRaw as any)
+                ?.compilerOptions as any) ?? {}),
+              experimentalDecorators: true,
+              emitDecoratorMetadata: true,
+            },
+          },
+        },
+      };
+
       config.moduleSideEffects = [
         ...(config.moduleSideEffects ?? []),
         'reflect-metadata',
