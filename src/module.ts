@@ -66,14 +66,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     if (controllers) {
       let handlers: NustHandler[] = [];
-      Object.entries(controllers).forEach(
-        ([key, value]) => {
-          handlers = [
-            ...handlers,
-            ...controllerToHandlers(key, value),
-          ];
-        },
-      );
+      Object.entries(controllers).forEach(([key, value]) => {
+        handlers = [...handlers, ...controllerToHandlers(key, value)];
+      });
       _nuxt.options.runtimeConfig.nust = {
         debug: _options.debug,
         handlers,

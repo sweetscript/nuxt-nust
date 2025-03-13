@@ -1,15 +1,9 @@
 import 'reflect-metadata';
 import type { NustHandler } from './types';
-import {
-  getMethodMetadata,
-  getPathMetadata,
-} from './decorators';
+import { getMethodMetadata, getPathMetadata } from './decorators';
 import { METADATA_PATH } from './constants';
 
-export function controllerToHandlers(
-  key: string,
-  Controller: any,
-) {
+export function controllerToHandlers(key: string, Controller: any) {
   const handlers: NustHandler[] = [];
 
   const controllerPrefix = Reflect.getMetadata(
@@ -22,44 +16,35 @@ export function controllerToHandlers(
         ? controllerPrefix
         : `/${controllerPrefix}`
       : '';
-  Object.getOwnPropertyNames(Controller.prototype).forEach(
-    (fn) => {
-      if (fn === 'constructor') {
+  Object.getOwnPropertyNames(Controller.prototype).forEach((fn) => {
+    if (fn === 'constructor') {
+      return;
+    }
+    const route = getPathMetadata(Controller.prototype, fn);
+    const method = getMethodMetadata(Controller.prototype, fn);
+    if (method) {
+      const pRoute =
+        prefix +
+        (route && route !== ''
+          ? route.startsWith('/')
+            ? route
+            : `/${route}`
+          : '');
+      if (
+        handlers.find(
+          (i) => i.route === pRoute && i.method === method,
+        )
+      ) {
         return;
       }
-      const route = getPathMetadata(
-        Controller.prototype,
+      handlers.push({
+        route: pRoute,
+        method,
         fn,
-      );
-      const method = getMethodMetadata(
-        Controller.prototype,
-        fn,
-      );
-      if (method) {
-        const pRoute =
-          prefix +
-          (route && route !== ''
-            ? route.startsWith('/')
-              ? route
-              : `/${route}`
-            : '');
-        if (
-          handlers.find(
-            (i) =>
-              i.route === pRoute && i.method === method,
-          )
-        ) {
-          return;
-        }
-        handlers.push({
-          route: pRoute,
-          method,
-          fn,
-          controllerKey: key,
-        });
-      }
-    },
-  );
+        controllerKey: key,
+      });
+    }
+  });
   return handlers;
 }
 
@@ -70,9 +55,7 @@ export function cleanPlainObject<T = any>(
 ): Partial<T> {
   const instance = new classRef();
   // const keys = Object.getOwnPropertyNames(classRef.prototype)
-  const keys = Object.keys(instance as never) as Array<
-    keyof T
-  >;
+  const keys = Object.keys(instance as never) as Array<keyof T>;
   return Object.keys(plainObj)
     .filter((key) => keys.includes(key as keyof T))
     .reduce((obj, key) => {

@@ -1,16 +1,11 @@
 import 'reflect-metadata';
-import {
-  createRouter,
-  defineEventHandler,
-  useBase,
-} from 'h3';
-import type { NustHandler } from '../../lib';
+import { createRouter, defineEventHandler, useBase } from 'h3';
+import { NustHandler, resolveInjectedArgs } from '../../lib';
 
 // @ts-expect-error
 const config = useRuntimeConfig();
 
-const handlers: NustHandler[] | undefined =
-  config.nust?.handlers;
+const handlers: NustHandler[] | undefined = config.nust?.handlers;
 
 const router = createRouter();
 
@@ -33,12 +28,12 @@ if (handlers) {
         ];
 
         if (Controller) {
-          return new Controller()[handler.fn](event);
+          return new Controller(...resolveInjectedArgs(Controller))[
+            handler.fn
+          ](event);
         }
       }),
-      handler.method === 'all'
-        ? undefined
-        : (handler.method as any),
+      handler.method === 'all' ? undefined : (handler.method as any),
     );
     if (config.nust.debug) {
       console.log(

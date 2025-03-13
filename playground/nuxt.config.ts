@@ -9,7 +9,8 @@ export default defineNuxtConfig({
         tsconfigRaw: {
           compilerOptions: {
             experimentalDecorators: true,
-          },
+            emitDecoratorMetadata: true,
+          } as any,
         },
       },
     },

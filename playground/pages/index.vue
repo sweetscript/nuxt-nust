@@ -1,5 +1,3 @@
 <template>
-  <div>
-    Nust module playground
-  </div>
+  <div>Nust module playground</div>
 </template>

@@ -17,25 +17,14 @@ import { type RouteParamMetadata } from '../types';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 
-export function getPathMetadata(
-  target: object,
-  propertyKey: string,
-) {
-  return Reflect.getMetadata(
-    METADATA_PATH,
-    target,
-    propertyKey,
-  );
+export function getPathMetadata(target: object, propertyKey: string) {
+  return Reflect.getMetadata(METADATA_PATH, target, propertyKey);
 }
 export function getMethodMetadata(
   target: object,
   propertyKey: string,
 ) {
-  return Reflect.getMetadata(
-    METADATA_METHOD,
-    target,
-    propertyKey,
-  );
+  return Reflect.getMetadata(METADATA_METHOD, target, propertyKey);
 }
 
 export const RequestMapping =
@@ -83,10 +72,7 @@ export const RequestMapping =
             const body = await readBody(event);
             const cls = data?.[0];
             const object = cls
-              ? plainToInstance(
-                  cls,
-                  cleanPlainObject(body, cls),
-                )
+              ? plainToInstance(cls, cleanPlainObject(body, cls))
               : body;
             const errors = await validate(object);
 
@@ -135,9 +121,7 @@ export const Delete = RequestMapping(RequestMethod.delete);
 /**
  * Route handler (method) Decorator. Routes HTTP Options requests to the specified path.
  */
-export const Options = RequestMapping(
-  RequestMethod.options,
-);
+export const Options = RequestMapping(RequestMethod.options);
 /**
  * Route handler (method) Decorator. Routes HTTP Head requests to the specified path.
  */

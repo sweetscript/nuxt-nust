@@ -1,8 +1,5 @@
 import 'reflect-metadata';
-import {
-  METADATA_ROUTE_ARGS,
-  RouteParamTypes,
-} from '../constants';
+import { METADATA_ROUTE_ARGS, RouteParamTypes } from '../constants';
 import type { RouteParamMetadata, Type } from '../types';
 
 type PipeType = any; //Type<PipeTransform> | PipeTransform)
@@ -12,11 +9,8 @@ const createRouteParamDecorator =
   (...data: any[]): ParameterDecorator =>
   (target, methodName, index) => {
     const existingArgs: RouteParamMetadata[] =
-      Reflect.getMetadata(
-        METADATA_ROUTE_ARGS,
-        target,
-        methodName!,
-      ) || [];
+      Reflect.getMetadata(METADATA_ROUTE_ARGS, target, methodName!) ||
+      [];
     existingArgs.push({
       index: index,
       type: paramType,
@@ -45,9 +39,10 @@ export function RawBody(
   property?: string,
   ...pipes: PipeType[]
 ): ParameterDecorator {
-  return createRouteParamDecorator(
-    RouteParamTypes.RAW_BODY,
-  )(property, ...pipes);
+  return createRouteParamDecorator(RouteParamTypes.RAW_BODY)(
+    property,
+    ...pipes,
+  );
 }
 
 export function Param(
