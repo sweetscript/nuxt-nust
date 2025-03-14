@@ -3,6 +3,9 @@ import { createRouter, defineEventHandler, useBase } from 'h3';
 import type { NustHandler } from '../../lib';
 import { resolveInjectedArgs } from '../../lib';
 
+// Controllers auto imported by module
+// @ts-expect-error
+const controllers = nust_controllers;
 // @ts-expect-error
 const config = useRuntimeConfig();
 
@@ -19,10 +22,16 @@ if (handlers) {
     router.add(
       handler.route,
       defineEventHandler(async (event) => {
-        const { default: controllers } = await import(
+        /*const { default: controllers } = await import(
           // @ts-expect-error any
           '~/server/nust/index'
-        );
+        );*/
+        /*const { default: controllers } = await import(
+          '~/' +
+            (controllerPath.endsWith('.ts')
+              ? controllerPath.substring(0, controllerPath.length - 3)
+              : controllerPath)
+        );*/
 
         const Controller = (controllers as any)[
           handler.controllerKey as any

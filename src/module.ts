@@ -2,6 +2,7 @@ import {
   defineNuxtModule,
   createResolver,
   addServerHandler,
+  addServerImports,
 } from '@nuxt/kit';
 import {
   type NustHandler,
@@ -21,6 +22,7 @@ declare module '@nuxt/schema' {
 // Module options TypeScript interface definition
 export interface ModuleOptions {
   debug?: boolean;
+  controllersFile: string;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -39,16 +41,9 @@ export default defineNuxtModule<ModuleOptions>({
     // addPlugin(resolve('./runtime/plugin'))
 
     const controllersPath =
-      _nuxt.options.rootDir + '/server/nust/index.ts';
+      _nuxt.options.rootDir + '/' + _options.controllersFile;
 
     _nuxt.hook('nitro:config', (config) => {
-      //TODO: add
-      // esbuild: {
-      //   options: {
-      //     target: 'esnext'
-      //   }
-      // },
-
       config.esbuild = {
         ...config.esbuild,
         options: {
@@ -70,6 +65,23 @@ export default defineNuxtModule<ModuleOptions>({
         'reflect-metadata',
       ];
     });
+
+    if (!_options.controllersFile) {
+      if (_options.debug) {
+        throw new Error(
+          'Nust Error: Please define `nust.controllersFile` property',
+        );
+      }
+      return;
+    }
+
+    addServerImports([
+      {
+        name: 'default',
+        as: 'nust_controllers',
+        from: resolve(controllersPath),
+      },
+    ]);
 
     // try {
     const cls = await import(controllersPath);
