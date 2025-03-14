@@ -10,7 +10,6 @@
       "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
-
     },
     "./utils": {
       "types": "./src/lib/index.ts",
@@ -40,6 +39,7 @@
     "@nuxt/kit": "^3.16.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "h3": "^1.15.1",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
