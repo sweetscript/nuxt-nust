@@ -1,7 +1,6 @@
 import {
   defineNuxtModule,
   createResolver,
-  addPlugin,
   addServerHandler,
 } from '@nuxt/kit';
 import {
@@ -72,10 +71,9 @@ export default defineNuxtModule<ModuleOptions>({
       ];
     });
 
-    let controllers: NustControllers;
     // try {
     const cls = await import(controllersPath);
-    controllers = cls.default;
+    const controllers: NustControllers = cls.default;
     // }
     // catch (err: any) {
     //   throw new Error('Failed to import Nust controllers. Please make sure you created the ./server/nust/index.ts file')

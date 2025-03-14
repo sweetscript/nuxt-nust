@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { METADATA_ROUTE_ARGS, RouteParamTypes } from '../constants';
-import type { RouteParamMetadata, Type } from '../types';
+import type { RouteParamMetadata } from '../types';
 
-type PipeType = any; //Type<PipeTransform> | PipeTransform)
+type PipeType = any;
 
 const createRouteParamDecorator =
   (paramType: RouteParamTypes) =>

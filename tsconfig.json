@@ -7,7 +7,7 @@
     "playground",
   ],
   "compilerOptions": {
-    "moduleResolution": "nodenext",
+    "moduleResolution": "Bundler",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }

@@ -1,5 +1,5 @@
 import type { H3Event as H3E } from 'h3';
-import { RouteParamTypes } from '~/src/lib/constants';
+import type { RouteParamTypes } from './constants';
 
 export type NustHandler = {
   route: string;
@@ -11,10 +11,6 @@ export type NustHandler = {
 export type NustControllers = Record<string, any>;
 
 export type H3Event = H3E;
-
-export interface Type<T = any> extends Function {
-  new (...args: any[]): T;
-}
 
 export interface RouteParamMetadata {
   index: number;

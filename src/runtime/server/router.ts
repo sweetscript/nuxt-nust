@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { createRouter, defineEventHandler, useBase } from 'h3';
-import { NustHandler, resolveInjectedArgs } from '../../lib';
+import type { NustHandler } from '../../lib';
+import { resolveInjectedArgs } from '../../lib';
 
 // @ts-expect-error
 const config = useRuntimeConfig();
@@ -19,7 +20,7 @@ if (handlers) {
       handler.route,
       defineEventHandler(async (event) => {
         const { default: controllers } = await import(
-          // @ts-expect-error
+          // @ts-expect-error any
           '~/server/nust/index'
         );
 

@@ -13,7 +13,7 @@ import {
   readBody,
 } from 'h3';
 import { cleanPlainObject } from '../utils';
-import { type RouteParamMetadata } from '../types';
+import type { RouteParamMetadata } from '../types';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 
