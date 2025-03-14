@@ -1,11 +1,11 @@
-import type { H3Event } from '../../../../../nust-module/src/lib';
+import type { H3Event } from '../../../../../nust-module/src/runtime/lib';
 import {
   Controller,
   Get,
   Patch,
   Post,
   Delete,
-} from '../../../../../nust-module/src/lib';
+} from '../../../../../nust-module/src/runtime/lib';
 
 @Controller('dog')
 export class DogController {

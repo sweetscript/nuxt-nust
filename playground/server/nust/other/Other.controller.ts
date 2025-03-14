@@ -1,4 +1,7 @@
-import { Controller, All } from '../../../../../nust-module/src/lib';
+import {
+  Controller,
+  All,
+} from '../../../../../nust-module/src/runtime/lib';
 
 @Controller()
 export class OtherController {

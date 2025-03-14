@@ -12,8 +12,8 @@
       "require": "./dist/module.cjs"
     },
     "./utils": {
-      "types": "./src/lib/index.ts",
-      "import": "./src/lib/index.ts"
+      "types": "./src/runtime/lib/index.ts",
+      "import": "./src/runtime/lib/index.ts"
     }
   },
   "main": "./dist/module.cjs",

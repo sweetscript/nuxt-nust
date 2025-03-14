@@ -1,4 +1,4 @@
-import type { H3Event } from '../../../../../nust-module/src/lib';
+import type { H3Event } from '../../../../../nust-module/src/runtime/lib';
 import {
   Controller,
   Get,
@@ -8,7 +8,7 @@ import {
   Body,
   Param,
   Inject,
-} from '../../../../../nust-module/src/lib';
+} from '../../../../../nust-module/src/runtime/lib';
 import { CreateCatDto } from './dto/CreateCat.dto';
 import { UpdateCatDto } from './dto/UpdateCat.dto';
 import { CatService } from './Cat.service';
