@@ -89,7 +89,7 @@ export default {
   cat: CatController
 } satisfies NustControllers
 ```
-
+ 
 3. Restart nuxt service
 4. Now the endpoint `/api/cat` is available
 
