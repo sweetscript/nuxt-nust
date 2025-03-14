@@ -1,27 +1,28 @@
 # Nust Module
 
-> Development in progress, not ready for production
+> 🚧 Development in progress, not ready for production
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-A Nuxt module that allows [NestJS-like](https://docs.nestjs.com/controllers) backend structure, using controllers, decorators and injectables 
+A Nuxt module that allows [NestJS-like](https://docs.nestjs.com/controllers) backend structure in nuxt, providing features like:
+
+- 🎮 &nbsp;Controllers
+- 🖌️ &nbsp;Decorators
+- 🛎️ &nbsp;Injectable providers/services
+- 🪄️ &nbsp;Parameter extraction
+- ✅️ &nbsp;Body/DTO Validation (using [`class-validator`](https://github.com/typestack/class-validator))
+- 🔄️ &nbsp;Transformers (using [`class-transformer`](https://github.com/typestack/class-transformer)) --> ⚠️ In development
+- 🔒️ &nbsp;Guards --> ⚠️ In development
 
 <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nust-module?file=playground%2Fapp.vue) -->
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
 
-<!--## Features
-
- Highlight some of the features your module provide here 
-- ⛰ &nbsp;Controllers
-- 🚠 &nbsp;Decorators
-- 🌲 &nbsp;Injectable provider services -->
-
 ## Setup
 
-Install the module to your Nuxt application:
+1. Install the module to your Nuxt application:
 
 <!--```bash
 npx nuxi module add nust-module
@@ -31,16 +32,20 @@ npx nuxi module add nust-module
 npm i nust-module
 ```
 
-Add `nust-module/module` to list of modules in your `nuxt.config.ts` file
+2. Add `nust-module` to list of modules in your `nuxt.config.ts` file
 
 ```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['nust-module/module']
+  modules: ['nust-module'],
+  nust: {
+    controllersFile: 'server/nust/index.ts', // Path to controllers export file in your project relative to root folder
+    debug: false, // Enable to show the routes added by your controllers in the logs
+  }
 })
 ```
 
-Create a file in your project with this path `server/nust/index.ts`
+3. Create a file in your project to export all controllers that sits under the path specified in the previous step, for example: `server/nust/index.ts`
 
 ```typescript
 // server/nust/index.ts
@@ -53,7 +58,7 @@ export default {
 } satisfies NustControllers
 ```
 
-That's it! You can now use Nust Module in your Nuxt app ✨
+4. That's it! You can now use Nust Module in your Nuxt app ✨
 
 #### Example of adding a controller, lets call this one `CatController`
 
@@ -89,7 +94,7 @@ export default {
 4. Now the endpoint `/api/cat` is available
 
 
-Documentation in progress
+> 🚧 Further Documentation in progress
 
 <!--## Contribution
 

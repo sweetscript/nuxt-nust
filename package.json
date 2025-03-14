@@ -7,17 +7,18 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+
+    },
+    "./utils": {
       "types": "./src/lib/index.ts",
       "import": "./src/lib/index.ts"
-    },
-    "./module": {
-      "types": "./src/module.ts",
-      "import": "./src/module.ts",
-      "require": "./src/module.ts"
     }
   },
-  "main": "./src/lib/index.ts",
-  "types": "./src/lib/index.ts",
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
   "files": [
     "dist",
     "src"
