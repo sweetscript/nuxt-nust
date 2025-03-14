@@ -1,6 +1,6 @@
 {
   "name": "nust-module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Nestjs-like api controllers for your Nuxt backend",
   "repository": "sweetscript/nust-module",
   "license": "MIT",
