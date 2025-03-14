@@ -1,8 +1,21 @@
 {
-  "name": "nust-module",
+  "name": "nuxt-nust",
   "version": "1.0.2",
   "description": "Nestjs-like api controllers for your Nuxt backend",
-  "repository": "sweetscript/nust-module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sweetscript/nuxt-nust.git"
+  },
+  "author": {
+    "name": "Majid Kuhail - Sweetscript Ltd",
+    "email": "majid@sweetscript.com",
+    "url": "sweetscript.com"
+  },
+  "bugs": {
+    "url": "https://github.com/sweetscript/nuxt-nust/issues",
+    "email": "majid@sweetscript.com"
+  },
+  "keywords": ["nuxt", "nestjs"],
   "license": "MIT",
   "type": "module",
   "exports": {

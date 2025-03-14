@@ -61,8 +61,6 @@ export const RequestMapping =
             methodName,
           ) || [];
 
-        // console.log('params', params);
-
         for (const param of params) {
           const { index, type, data } = param;
 

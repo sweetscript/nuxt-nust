@@ -1,4 +1,4 @@
-# Nust Module
+# Nust Module for Nuxt
 
 > 🚧 Development in progress, not ready for production
 
@@ -17,7 +17,7 @@ A Nuxt module that allows [NestJS-like](https://docs.nestjs.com/controllers) bac
 - 🔄️ &nbsp;Transformers (using [`class-transformer`](https://github.com/typestack/class-transformer)) --> ⚠️ In development
 - 🔒️ &nbsp;Guards --> ⚠️ In development
 
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nust-module?file=playground%2Fapp.vue) -->
+<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nuxt-nust?file=playground%2Fapp.vue) -->
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
 
 ## Setup
@@ -25,19 +25,19 @@ A Nuxt module that allows [NestJS-like](https://docs.nestjs.com/controllers) bac
 1. Install the module to your Nuxt application:
 
 <!--```bash
-npx nuxi module add nust-module
+npx nuxi module add nuxt-nust
 ```-->
 
 ```bash
-npm i nust-module
+npm i nuxt-nust
 ```
 
-2. Add `nust-module` to list of modules in your `nuxt.config.ts` file
+2. Add `nuxt-nust` to list of modules in your `nuxt.config.ts` file
 
 ```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['nust-module'],
+  modules: ['nuxt-nust'],
   nust: {
     controllersFile: 'server/nust/index.ts', // Path to controllers export file in your project relative to root folder
     debug: false, // Enable to show the routes added by your controllers in the logs
@@ -49,7 +49,7 @@ export default defineNuxtConfig({
 
 ```typescript
 // server/nust/index.ts
-import { type NustControllers } from 'nust-module'
+import { type NustControllers } from 'nuxt-nust'
 
 export default {
   // Here you'll be adding your controller classes
@@ -65,7 +65,7 @@ export default {
 1.Create a controller file under the nust directory, `server/nust/cat/Cat.controller.ts`
 
 ```typescript
-import { Controller, type H3Event } from 'nust-module'
+import { Controller, type H3Event } from 'nuxt-nust'
 
 @Controller('cat')
 export class CatController {
@@ -82,7 +82,7 @@ export class CatController {
 
 ```typescript
 // server/nust/index.ts
-import {type NustControllers} from 'nust-module'
+import {type NustControllers} from 'nuxt-nust'
 import { CatController } from "./cat/Cat.controller";
 
 export default {
@@ -129,14 +129,14 @@ export default {
 
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/nust-module/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/nust-module
+[npm-version-src]: https://img.shields.io/npm/v/nuxt-nust/latest.svg?style=flat&colorA=020420&colorB=00DC82
+[npm-version-href]: https://npmjs.com/package/nuxt-nust
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/nust-module.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npm.chart.dev/nust-module
+[npm-downloads-src]: https://img.shields.io/npm/dm/nuxt-nust.svg?style=flat&colorA=020420&colorB=00DC82
+[npm-downloads-href]: https://npm.chart.dev/nuxt-nust
 
-[license-src]: https://img.shields.io/npm/l/nust-module.svg?style=flat&colorA=020420&colorB=00DC82
-[license-href]: https://npmjs.com/package/nust-module
+[license-src]: https://img.shields.io/npm/l/nuxt-nust.svg?style=flat&colorA=020420&colorB=00DC82
+[license-href]: https://npmjs.com/package/nuxt-nust
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
