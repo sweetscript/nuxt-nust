@@ -16,6 +16,7 @@ import { cleanPlainObject } from '../utils';
 import type { RouteParamMetadata } from '../types';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
+import { NustGuard } from '../decorators/guard.decorator';
 
 export function getPathMetadata(target: object, propertyKey: string) {
   return Reflect.getMetadata(METADATA_PATH, target, propertyKey);
@@ -54,6 +55,32 @@ export const RequestMapping =
         const event: H3Event = args?.[0];
         if (!event) return originalMethod.apply(this, args);
 
+        // Check guards
+        const controllerGuards: (typeof NustGuard | NustGuard)[] = (
+          target as any
+        ).__guards;
+        if (controllerGuards) {
+          for (const guardCls of controllerGuards) {
+            const guard =
+              guardCls instanceof NustGuard
+                ? guardCls
+                : // @ts-expect-error
+                  new guardCls();
+            const authorized = await guard.authorize(args[0]);
+            if (!authorized) {
+              throw createError(
+                guard.notAuthorizedException
+                  ? guard.notAuthorizedException()
+                  : {
+                      statusCode: 403,
+                      statusMessage: 'Forbidden',
+                    },
+              );
+            }
+          }
+        }
+
+        // Assign params
         const params: RouteParamMetadata[] =
           Reflect.getOwnMetadata(
             METADATA_ROUTE_ARGS,

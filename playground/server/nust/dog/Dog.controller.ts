@@ -6,8 +6,11 @@ import {
   Post,
   Delete,
 } from '../../../../../nust-module/src/runtime/lib';
+import AuthGuard from '../../guards/Auth.guard';
 
-@Controller('dog')
+@Controller('dog', {
+  guards: [AuthGuard],
+})
 export class DogController {
   @Get('')
   findAll() {

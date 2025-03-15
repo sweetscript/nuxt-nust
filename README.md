@@ -7,20 +7,20 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-A Nuxt module that allows [NestJS-like](https://docs.nestjs.com/controllers) backend structure in nuxt, providing features like:
+A Nuxt module that allows [NestJS like](https://docs.nestjs.com/controllers) backend structure in nuxt, powering nuxt backend with features like:
 
 - 🎮 &nbsp;Controllers
 - 🖌️ &nbsp;Decorators
 - 🛎️ &nbsp;Injectable providers/services
 - 🪄️ &nbsp;Parameter extraction
 - ✅️ &nbsp;Body/DTO Validation (using [`class-validator`](https://github.com/typestack/class-validator))
-- 🔄️ &nbsp;Transformers (using [`class-transformer`](https://github.com/typestack/class-transformer)) --> ⚠️ In development
-- 🔒️ &nbsp;Guards --> ⚠️ In development
+- 🔄️ &nbsp;Transformers (using [`class-transformer`](https://github.com/typestack/class-transformer))
+- 🔒️ &nbsp;Guards
 
 <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nuxt-nust?file=playground%2Fapp.vue) -->
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
 
-## Setup
+## Usage
 
 1. Install the module to your Nuxt application:
 
@@ -32,7 +32,7 @@ npx nuxi module add nuxt-nust
 npm i nuxt-nust
 ```
 
-2. Add `nuxt-nust` to list of modules in your `nuxt.config.ts` file
+2. Add `nuxt-nust` to list of modules in your `nuxt.config.ts` file, along with `nust` configuration:
 
 ```typescript
 // nuxt.config.ts
