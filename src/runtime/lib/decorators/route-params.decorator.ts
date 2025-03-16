@@ -54,3 +54,23 @@ export function Param(
     ...pipes,
   );
 }
+
+export function Query(
+  property?: string,
+  ...pipes: PipeType[]
+): ParameterDecorator {
+  return createRouteParamDecorator(RouteParamTypes.QUERY)(
+    property,
+    ...pipes,
+  );
+}
+
+export function Ip(
+  property?: string,
+  ...pipes: PipeType[]
+): ParameterDecorator {
+  return createRouteParamDecorator(RouteParamTypes.IP)(
+    property,
+    ...pipes,
+  );
+}

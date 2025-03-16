@@ -94,6 +94,13 @@ export default {
 4. Now the endpoint `/api/cat` is available
 
 
+## Decorators
+
+# Controller decorator
+
+Adding @Controller decorator to your controller class will
+
+
 > 🚧 Further Documentation in progress
 
 <!--## Contribution

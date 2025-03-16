@@ -8,6 +8,7 @@ import {
 } from '../constants';
 import {
   createError,
+  getQuery,
   getRouterParam,
   type H3Event,
   readBody,
@@ -115,6 +116,22 @@ export const RequestMapping =
             if (pID && typeof pID === 'string') {
               args[index] = getRouterParam(event, pID);
             }
+          } else if (type === RouteParamTypes.QUERY) {
+            const query = getQuery(event);
+            const qID = data?.[0];
+            if (qID && typeof qID === 'string') {
+              args[index] = query[qID];
+            } else {
+              args[index] = query;
+            }
+          } else if (type === RouteParamTypes.IP) {
+            const forwarded =
+              event.node.req.headers['x-forwarded-for'];
+            args[index] = forwarded
+              ? typeof forwarded === 'string'
+                ? forwarded.split(',')[0]
+                : forwarded[0].split(',')[0]
+              : event.node.req.socket.remoteAddress;
           }
         }
         return originalMethod.apply(this, args);
