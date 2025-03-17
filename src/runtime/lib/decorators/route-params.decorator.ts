@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { METADATA_ROUTE_ARGS, RouteParamTypes } from '../constants';
 import type { RouteParamMetadata } from '../types';
+import type { H3Event } from 'h3';
 
 type PipeType = any;
 
@@ -74,3 +75,27 @@ export function Ip(
     ...pipes,
   );
 }
+
+export const createCustomParamDecorator =
+  (handler: (event: H3Event) => any) =>
+  (...data: any[]): ParameterDecorator =>
+  (target, methodName, index) => {
+    const existingArgs: RouteParamMetadata[] =
+      Reflect.getMetadata(METADATA_ROUTE_ARGS, target, methodName!) ||
+      [];
+    existingArgs.push({
+      index: index,
+      type: RouteParamTypes.CUSTOM,
+      data: data,
+      meta: {
+        handler,
+      },
+    });
+
+    Reflect.defineMetadata(
+      METADATA_ROUTE_ARGS,
+      existingArgs,
+      target,
+      methodName!,
+    );
+  };

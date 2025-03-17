@@ -8,6 +8,7 @@ import {
 } from '../../../../../nust-module/src/runtime/lib';
 import AuthGuard from '~/server/guards/Auth.guard';
 import type { H3Event } from 'h3';
+import Method from '~/server/decorators/Method.decorator';
 
 @Controller()
 export class OtherController {
@@ -39,6 +40,13 @@ export class OtherController {
       query: {
         id: id,
       },
+    };
+  }
+
+  @All('custom-param-decorator')
+  customParamDirector(_event: H3Event, @Method() method: string) {
+    return {
+      method: method,
     };
   }
 }

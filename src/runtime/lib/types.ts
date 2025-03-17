@@ -16,6 +16,7 @@ export interface RouteParamMetadata {
   index: number;
   type: RouteParamTypes;
   data?: any;
+  meta?: any;
 }
 export type InjectedDepType = {
   index: number;

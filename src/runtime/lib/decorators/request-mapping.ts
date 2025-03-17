@@ -90,7 +90,7 @@ export const RequestMapping =
           ) || [];
 
         for (const param of params) {
-          const { index, type, data } = param;
+          const { index, type, data, meta } = param;
 
           if (type === RouteParamTypes.RAW_BODY) {
             args[index] = await readBody(event);
@@ -132,6 +132,10 @@ export const RequestMapping =
                 ? forwarded.split(',')[0]
                 : forwarded[0].split(',')[0]
               : event.node.req.socket.remoteAddress;
+          } else if (type === RouteParamTypes.CUSTOM) {
+            if (meta?.handler) {
+              args[index] = meta.handler(event);
+            }
           }
         }
         return originalMethod.apply(this, args);
