@@ -44,7 +44,7 @@ export class OtherController {
   }
 
   @All('custom-param-decorator')
-  customParamDirector(_event: H3Event, @Method() method: string) {
+  customParamDecorator(_event: H3Event, @Method() method: string) {
     return {
       method: method,
     };
