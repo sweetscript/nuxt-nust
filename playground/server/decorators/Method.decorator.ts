@@ -6,5 +6,5 @@ import { createCustomParamDecorator } from '../../../src/runtime/lib';
 export default function Method() {
   return createCustomParamDecorator((event) => {
     return event.method;
-  })();
+  });
 }

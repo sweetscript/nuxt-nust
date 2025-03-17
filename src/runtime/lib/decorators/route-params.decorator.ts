@@ -77,8 +77,7 @@ export function Ip(
 }
 
 export const createCustomParamDecorator =
-  (handler: (event: H3Event) => any) =>
-  (...data: any[]): ParameterDecorator =>
+  (handler: (event: H3Event) => any): ParameterDecorator =>
   (target, methodName, index) => {
     const existingArgs: RouteParamMetadata[] =
       Reflect.getMetadata(METADATA_ROUTE_ARGS, target, methodName!) ||
@@ -86,7 +85,6 @@ export const createCustomParamDecorator =
     existingArgs.push({
       index: index,
       type: RouteParamTypes.CUSTOM,
-      data: data,
       meta: {
         handler,
       },
