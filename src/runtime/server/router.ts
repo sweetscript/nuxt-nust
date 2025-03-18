@@ -5,7 +5,12 @@ import { controllerToHandlers, resolveInjectedArgs } from '../lib';
 
 // Controllers auto imported by module
 // @ts-expect-error
-const controllers = nust_controllers;
+if (!nust_controllers) {
+  console.log('NUST Error: controllers failed to be imported');
+}
+// @ts-expect-error
+const controllers = nust_controllers ?? [];
+
 // @ts-expect-error
 const config = useRuntimeConfig();
 
