@@ -3,6 +3,7 @@ import {
   createResolver,
   addServerHandler,
   addServerImports,
+  addServerPlugin,
 } from '@nuxt/kit';
 
 declare module '@nuxt/schema' {
@@ -73,6 +74,32 @@ export default defineNuxtModule<ModuleOptions>({
     _nuxt.options.runtimeConfig.nust = {
       debug: _options.debug,
     };
+
+    // Add controller routes to OpenAPI
+    // _nuxt.options.runtimeConfig.nitro!.openAPI!.meta = {
+    //   ..._nuxt.options.runtimeConfig.nitro!.openAPI!.meta,
+    // };
+
+    // _nuxt.hook('nitro:init', (nitro) => {
+    //   console.log('nitro.scannedHandlers', nitro.scannedHandlers);
+    //   console.log('nitro.options.handlers', nitro.options.handlers);
+    //   nitro.options.handlers = [
+    //     ...nitro.options.handlers,
+    //     {
+    //       route: '/test',
+    //       handler: undefined,
+    //       meta: {
+    //         openAPI: {
+    //           tags: ['test routes'],
+    //         },
+    //       },
+    //     },
+    //   ];
+    // });
+    // _nuxt.hook('build:before', () => {
+    //   console.log('config', _nuxt.options.nitro.handlers);
+    // });
+    addServerPlugin(resolve('./runtime/server/plugin'));
 
     addServerImports([
       {

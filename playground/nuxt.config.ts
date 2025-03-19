@@ -6,4 +6,10 @@ export default defineNuxtConfig({
     controllersFile: 'server/nust/index.ts',
     debug: true,
   },
+
+  nitro: {
+    experimental: {
+      openAPI: true,
+    },
+  },
 });
