@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {
   defineNuxtModule,
   createResolver,
@@ -36,9 +37,15 @@ export default defineNuxtModule<ModuleOptions>({
     // addPlugin(resolve('./runtime/plugin'));
     // addServerPlugin(resolve('./runtime/server/plugin'));
 
+    const controllersFile = _options.controllersFile.startsWith('~/')
+      ? _options.controllersFile.substring(2)
+      : _options.controllersFile;
     const controllersPath =
-      _nuxt.options.rootDir + '/' + _options.controllersFile;
+      _nuxt.options.rootDir + '/' + controllersFile;
 
+    _nuxt.hook('nitro:build:before', (ctx) => {
+      ctx.options.moduleSideEffects.push('reflect-metadata');
+    });
     _nuxt.hook('nitro:config', (config) => {
       config.esbuild = {
         ...config.esbuild,
@@ -75,30 +82,19 @@ export default defineNuxtModule<ModuleOptions>({
       debug: _options.debug,
     };
 
-    // Add controller routes to OpenAPI
-    // _nuxt.options.runtimeConfig.nitro!.openAPI!.meta = {
-    //   ..._nuxt.options.runtimeConfig.nitro!.openAPI!.meta,
-    // };
+    // const { default: controllers } = await import(
+    //   _options.controllersFile
+    // );
+    // console.log('controllers', controllers);
+    //
+    // const type = Reflect.getMetadata(
+    //   'design:type',
+    //   controllers.cat.prototype,
+    //   'findOne',
+    // );
+    // console.log('reflect', type);
+    // console.log(Object.keys(type));
 
-    // _nuxt.hook('nitro:init', (nitro) => {
-    //   console.log('nitro.scannedHandlers', nitro.scannedHandlers);
-    //   console.log('nitro.options.handlers', nitro.options.handlers);
-    //   nitro.options.handlers = [
-    //     ...nitro.options.handlers,
-    //     {
-    //       route: '/test',
-    //       handler: undefined,
-    //       meta: {
-    //         openAPI: {
-    //           tags: ['test routes'],
-    //         },
-    //       },
-    //     },
-    //   ];
-    // });
-    // _nuxt.hook('build:before', () => {
-    //   console.log('config', _nuxt.options.nitro.handlers);
-    // });
     addServerPlugin(resolve('./runtime/server/plugin'));
 
     addServerImports([

@@ -12,6 +12,7 @@ import {
 import { CreateCatDto } from './dto/CreateCat.dto';
 import { UpdateCatDto } from './dto/UpdateCat.dto';
 import { CatService } from './Cat.service';
+import type { CatEntity } from '~/server/nust/cat/entity/Cat.entity';
 
 @Controller('cat')
 export class CatController {
@@ -35,7 +36,7 @@ export class CatController {
 
   // Get one example
   @Get(':id')
-  findOne(event: H3Event, @Param('id') id: string) {
+  findOne(event: H3Event, @Param('id') id: string): CatEntity {
     return this.catService.findOne(id);
     // const id = getRouterParam(event, 'id')
     // return `this action return a cat with ID:${id}`;
