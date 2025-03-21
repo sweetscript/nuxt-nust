@@ -98,9 +98,12 @@ export const RequestMapping =
             const body = await readBody(event);
             const cls = data?.[0];
             const object = cls
-              ? plainToInstance(cls, cleanPlainObject(body, cls))
+              ? plainToInstance(
+                  cls,
+                  cleanPlainObject(body ?? {}, cls),
+                )
               : body;
-            const errors = await validate(object);
+            const errors = object ? await validate(object) : [];
 
             if (errors.length) {
               throw createError({

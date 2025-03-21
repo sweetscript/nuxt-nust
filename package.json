@@ -22,6 +22,11 @@
   "license": "MIT",
   "type": "module",
   "exports": {
+    "./module": {
+      "types": "./src/module.ts",
+      "import": "./src/module.ts",
+      "require": "./dist/module.cjs"
+    },
     ".": {
       "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",

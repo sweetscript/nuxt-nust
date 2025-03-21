@@ -5,6 +5,8 @@ import { controllerToHandlers } from '../lib/utils';
 import type {
   OperationObject,
   ParameterObject,
+  SchemaObject,
+  ComponentsObject,
   PathsObject,
 } from 'openapi-typescript';
 import {
@@ -20,10 +22,14 @@ const convertHandlerToOpenAPIOperation = (
 ): {
   path: string;
   operation: OperationObject;
+  components: ComponentsObject;
 } => {
   const url = handler.route;
   const urlParts = url.split('/');
   const parameters: ParameterObject[] = [];
+  const components: ComponentsObject = {
+    schemas: {},
+  };
 
   const path = urlParts
     .map((part) => {
@@ -67,9 +73,8 @@ const convertHandlerToOpenAPIOperation = (
   );
 
   const bodyClass = bodyArg?.data?.[0];
-  if (bodyClass) {
-    // const schema = convertToOpenApiSchema(bodyClass);
-    // console.log('schema', schema);
+  if (bodyClass && bodyClass.name) {
+    const schema = convertToOpenApiSchema(bodyClass);
     operation.requestBody = {
       required: true,
       content: {
@@ -80,11 +85,15 @@ const convertHandlerToOpenAPIOperation = (
         },
       },
     };
+    if (components.schemas) {
+      components.schemas[bodyClass.name] = schema;
+    }
   }
 
   return {
     path: path,
     operation,
+    components,
   };
 };
 
@@ -102,7 +111,8 @@ function getOpenApiType(type: any) {
       return { $ref: `#/components/schemas/${type?.name}` }; // Handle custom types
   }
 }
-function convertToOpenApiSchema(classType: any) {
+
+function convertToOpenApiSchema(classType: any): SchemaObject {
   const cls = new classType();
   const properties: any = {};
   // const keys = Object.getOwnPropertyNames(classType.prototype);
@@ -114,12 +124,11 @@ function convertToOpenApiSchema(classType: any) {
       classType.prototype,
       key,
     );
-    console.log(
-      `Reflect.getMetadata ${key}`,
-      Reflect.getMetadataKeys(classType, key),
-    );
+    console.log(`schema type ${key}`, type);
     if (type) {
       properties[key] = getOpenApiType(type);
+    } else {
+      properties[key] = { type: 'string' };
     }
   });
 
@@ -129,23 +138,30 @@ function convertToOpenApiSchema(classType: any) {
   };
 }
 
-// if(!controllers) return
-
 let handlers: NustHandler[] = [];
 Object.entries(controllers).forEach(([key, value]) => {
   handlers = [...handlers, ...controllerToHandlers(key, value)];
 });
 
 const nustPaths: PathsObject = {};
+const nustComponents: ComponentsObject = {
+  schemas: {},
+};
 for (const handler of handlers) {
   const method = handler.method.toLowerCase();
 
-  const { path, operation } =
+  const { path, operation, components } =
     convertHandlerToOpenAPIOperation(handler);
   if (!nustPaths[`/api${path}`]) {
     nustPaths[`/api${path}`] = {};
   }
   nustPaths[`/api${path}`][method as any] = operation;
+  if (components.schemas) {
+    nustComponents.schemas = {
+      ...nustComponents.schemas,
+      ...components.schemas,
+    };
+  }
 }
 
 export default defineNitroPlugin((nitro) => {
@@ -158,6 +174,14 @@ export default defineNitroPlugin((nitro) => {
     (response.body as any).paths = {
       ...((response.body as any)?.paths ?? {}),
       ...nustPaths,
+    };
+
+    (response.body as any).components = {
+      ...((response.body as any)?.components ?? {}),
+      schemas: {
+        ...((response.body as any)?.components?.schemas ?? {}),
+        ...nustComponents.schemas,
+      },
     };
   });
 });
