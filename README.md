@@ -16,6 +16,7 @@ A Nuxt module that allows [NestJS like](https://docs.nestjs.com/controllers) bac
 - ✅️ &nbsp;Body/DTO Validation (using [`class-validator`](https://github.com/typestack/class-validator))
 - 🔄️ &nbsp;Transformers (using [`class-transformer`](https://github.com/typestack/class-transformer))
 - 🔒️ &nbsp;Guards
+- 📖️ &nbsp;OpenAPI documentation support, Nestjs like Api documentation decorators for better Swagger and Scalar support
 
 <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nuxt-nust?file=playground%2Fapp.vue) -->
 <!-- - [📖 &nbsp;Documentation](https://example.com) -->
@@ -103,9 +104,11 @@ Adding @Controller decorator to your controller class will
 
 > 🚧 Further Documentation in progress
 
-<!--## Contribution
+## Contribution
 
-<details>
+Contributions are welcome 🙏
+
+<!--<details>
   <summary>Local development</summary>
   
   ```bash

@@ -6,6 +6,7 @@ export const METADATA_CONTROLLER_WATERMARK = '__controller__';
 export const METADATA_INJECTED = '__injected__';
 export const MD_OAPI_CLASS_SCHEMA = '__oapi_class_schema__';
 export const MD_OAPI_PROPERTIES = '__oapi_properties__';
+export const MD_OAPI_RESPONSES = '__oapi_responses__';
 
 export enum RequestMethod {
   get = 'get',

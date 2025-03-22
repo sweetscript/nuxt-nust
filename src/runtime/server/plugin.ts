@@ -8,10 +8,12 @@ import type {
   SchemaObject,
   ComponentsObject,
   PathsObject,
+  ResponsesObject,
 } from 'openapi-typescript';
 import {
   MD_OAPI_CLASS_SCHEMA,
   MD_OAPI_PROPERTIES,
+  MD_OAPI_RESPONSES,
   METADATA_ROUTE_ARGS,
   RouteParamTypes,
 } from '../lib/constants';
@@ -92,6 +94,15 @@ const convertHandlerToOpenAPIOperation = (
     }
   }
 
+  const openApiResponses = Reflect.getMetadata(
+    MD_OAPI_RESPONSES,
+    controller.prototype,
+    handler.fn,
+  );
+  if (openApiResponses) {
+    operation.responses = openApiResponses;
+  }
+
   return {
     path: path,
     operation,
@@ -118,7 +129,6 @@ function convertToOpenApiSchema(classType: any): SchemaObject {
   const cls = new classType();
   const properties: any = {};
 
-  // const keys = Object.getOwnPropertyNames(classType.prototype);
   const keys = Object.getOwnPropertyNames(cls);
 
   const openApiClsSchema: Record<string, any> =
