@@ -10,6 +10,8 @@ import type {
   PathsObject,
 } from 'openapi-typescript';
 import {
+  MD_OAPI_CLASS_SCHEMA,
+  MD_OAPI_PROPERTIES,
   METADATA_ROUTE_ARGS,
   RouteParamTypes,
 } from '../lib/constants';
@@ -97,7 +99,7 @@ const convertHandlerToOpenAPIOperation = (
   };
 };
 
-function getOpenApiType(type: any) {
+/*function getOpenApiType(type: any) {
   switch (type) {
     case String:
       return { type: 'string' };
@@ -110,31 +112,42 @@ function getOpenApiType(type: any) {
     default:
       return { $ref: `#/components/schemas/${type?.name}` }; // Handle custom types
   }
-}
+}*/
 
 function convertToOpenApiSchema(classType: any): SchemaObject {
   const cls = new classType();
   const properties: any = {};
+
   // const keys = Object.getOwnPropertyNames(classType.prototype);
   const keys = Object.getOwnPropertyNames(cls);
 
+  const openApiClsSchema: Record<string, any> =
+    Reflect.getMetadata(MD_OAPI_CLASS_SCHEMA, classType) || {};
+  const openApiClsProperties: Record<string, any> =
+    Reflect.getMetadata(MD_OAPI_PROPERTIES, classType.prototype) ||
+    {};
+
+  const requiredProps: string[] = openApiClsSchema?.required || [];
+
   keys.forEach((key) => {
-    const type = Reflect.getMetadata(
-      'design:type',
-      classType.prototype,
-      key,
-    );
-    console.log(`schema type ${key}`, type);
-    if (type) {
-      properties[key] = getOpenApiType(type);
-    } else {
-      properties[key] = { type: 'string' };
+    const { required, ...openAPISchema } =
+      openApiClsProperties[key] ?? {};
+    properties[key] = openApiClsProperties[key]
+      ? openAPISchema
+      : {
+          type: 'string',
+        };
+    if (required) {
+      requiredProps.push(key);
     }
   });
 
   return {
     type: 'object',
     properties,
+    required: requiredProps,
+    title: openApiClsSchema?.title || undefined,
+    description: openApiClsSchema?.description || undefined,
   };
 }
 

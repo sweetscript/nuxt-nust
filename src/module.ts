@@ -33,9 +33,7 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(_options, _nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
-    // // // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
-    // addPlugin(resolve('./runtime/plugin'));
-    // addServerPlugin(resolve('./runtime/server/plugin'));
+    // _nuxt.options.build.transpile.push('nuxt-nuxt');
 
     const controllersFile = _options.controllersFile.startsWith('~/')
       ? _options.controllersFile.substring(2)
@@ -81,19 +79,6 @@ export default defineNuxtModule<ModuleOptions>({
     _nuxt.options.runtimeConfig.nust = {
       debug: _options.debug,
     };
-
-    // const { default: controllers } = await import(
-    //   _options.controllersFile
-    // );
-    // console.log('controllers', controllers);
-    //
-    // const type = Reflect.getMetadata(
-    //   'design:type',
-    //   controllers.cat.prototype,
-    //   'findOne',
-    // );
-    // console.log('reflect', type);
-    // console.log(Object.keys(type));
 
     addServerPlugin(resolve('./runtime/server/plugin'));
 
