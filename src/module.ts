@@ -35,7 +35,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // _nuxt.options.build.transpile.push('nuxt-nuxt');
 
-    const controllersFile = _options.controllersFile.startsWith('~/')
+    const controllersFile = _options.controllersFile?.startsWith('~/')
       ? _options.controllersFile.substring(2)
       : _options.controllersFile;
     const controllersPath =
