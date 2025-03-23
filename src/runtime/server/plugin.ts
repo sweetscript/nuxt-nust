@@ -1,7 +1,10 @@
 import 'reflect-metadata';
 import { defineNitroPlugin } from 'nitropack/runtime';
 import type { NustHandler, RouteParamMetadata } from '../lib/types';
-import { controllerToHandlers } from '../lib/utils';
+import {
+  controllerToHandlers,
+  convertClassToOpenApiSchema,
+} from '../lib/utils';
 import type {
   OperationObject,
   ParameterObject,
@@ -78,7 +81,7 @@ const convertHandlerToOpenAPIOperation = (
 
   const bodyClass = bodyArg?.data?.[0];
   if (bodyClass && bodyClass.name) {
-    const schema = convertToOpenApiSchema(bodyClass);
+    const schema = convertClassToOpenApiSchema(bodyClass);
     operation.requestBody = {
       required: true,
       content: {
@@ -94,13 +97,34 @@ const convertHandlerToOpenAPIOperation = (
     }
   }
 
-  const openApiResponses = Reflect.getMetadata(
+  const openApiResponses: Record<string, any> = Reflect.getMetadata(
     MD_OAPI_RESPONSES,
     controller.prototype,
     handler.fn,
   );
+
   if (openApiResponses) {
-    operation.responses = openApiResponses;
+    Object.entries(openApiResponses).forEach(([key, value]) => {
+      const { instance, content, description, ...rest } = value;
+      if (!operation.responses) {
+        operation.responses = {};
+      }
+
+      const instanceSchema = instance
+        ? convertClassToOpenApiSchema(instance)
+        : undefined;
+      operation.responses[key] = {
+        description: description ?? instance?.name,
+        content: instanceSchema
+          ? {
+              'application/json': {
+                schema: instanceSchema,
+              },
+            }
+          : content,
+        ...rest,
+      };
+    });
   }
 
   return {
@@ -109,57 +133,6 @@ const convertHandlerToOpenAPIOperation = (
     components,
   };
 };
-
-/*function getOpenApiType(type: any) {
-  switch (type) {
-    case String:
-      return { type: 'string' };
-    case Number:
-      return { type: 'number' }; // use 'integer' if you specifically want integers
-    case Boolean:
-      return { type: 'boolean' };
-    case Array:
-      return { type: 'array' };
-    default:
-      return { $ref: `#/components/schemas/${type?.name}` }; // Handle custom types
-  }
-}*/
-
-function convertToOpenApiSchema(classType: any): SchemaObject {
-  const cls = new classType();
-  const properties: any = {};
-
-  const keys = Object.getOwnPropertyNames(cls);
-
-  const openApiClsSchema: Record<string, any> =
-    Reflect.getMetadata(MD_OAPI_CLASS_SCHEMA, classType) || {};
-  const openApiClsProperties: Record<string, any> =
-    Reflect.getMetadata(MD_OAPI_PROPERTIES, classType.prototype) ||
-    {};
-
-  const requiredProps: string[] = openApiClsSchema?.required || [];
-
-  keys.forEach((key) => {
-    const { required, ...openAPISchema } =
-      openApiClsProperties[key] ?? {};
-    properties[key] = openApiClsProperties[key]
-      ? openAPISchema
-      : {
-          type: 'string',
-        };
-    if (required) {
-      requiredProps.push(key);
-    }
-  });
-
-  return {
-    type: 'object',
-    properties,
-    required: requiredProps,
-    title: openApiClsSchema?.title || undefined,
-    description: openApiClsSchema?.description || undefined,
-  };
-}
 
 let handlers: NustHandler[] = [];
 Object.entries(controllers).forEach(([key, value]) => {

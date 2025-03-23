@@ -8,6 +8,8 @@
     "generate": "nuxi generate"
   },
   "dependencies": {
-    "nuxt": "^3.16.0"
+    "@scalar/nuxt": "^0.3.7",
+    "nuxt": "^3.16.0",
+    "nuxt-nust": "file:../"
   }
 }

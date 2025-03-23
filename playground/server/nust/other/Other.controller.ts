@@ -5,7 +5,7 @@ import {
   UseGuards,
   Ip,
   Query,
-} from '../../../../../nust-module/src/runtime/lib';
+} from 'nuxt-nust/utils';
 import AuthGuard from '~/server/guards/Auth.guard';
 import type { H3Event } from 'h3';
 import Method from '~/server/decorators/Method.decorator';

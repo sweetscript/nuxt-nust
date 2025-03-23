@@ -1,5 +1,5 @@
 export class CatEntity {
-  id: string;
+  id: number;
   name: string;
   age: number;
   breed: string;

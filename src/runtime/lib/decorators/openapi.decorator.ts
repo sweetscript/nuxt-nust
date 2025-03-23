@@ -35,7 +35,7 @@ interface ApiPropertyOptions
 }
 
 interface ApiResponseOptions
-  extends Pick<ResponseObject, 'description' | 'content'> {
+  extends Pick<Partial<ResponseObject>, 'description' | 'content'> {
   status: number;
   instance?: any;
 }
@@ -72,30 +72,19 @@ export function ApiResponse(
   return (
     target: object,
     propertyKey: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>,
+    _descriptor: TypedPropertyDescriptor<any>,
   ) => {
     const { status, instance, description, content } = responseSchema;
 
-    /*const existing: Record<string, ResponsesObject> =
-      Reflect.getMetadata(MD_OAPI_RESPONSES, target) || {};
-
-    existing[propertyKey.toString()] =
-      existing[propertyKey.toString()] || {};
-    existing[propertyKey.toString()][`${status}`] = {
-      description: description,
-      content: content,
-      //
-    };
-
-    Reflect.defineMetadata(MD_OAPI_RESPONSES, existing, target);*/
-    const existing: ResponsesObject =
+    const existing =
       Reflect.getMetadata(MD_OAPI_RESPONSES, target, propertyKey) ||
       {};
 
     existing[`${status}`] = {
       description: description,
       content: content,
-      //
+      instance: instance,
+      //§
     };
 
     Reflect.defineMetadata(

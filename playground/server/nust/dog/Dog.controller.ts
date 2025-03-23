@@ -1,11 +1,11 @@
-import type { H3Event } from '../../../../../nust-module/src/runtime/lib';
+import type { H3Event } from 'h3';
 import {
   Controller,
   Get,
   Patch,
   Post,
   Delete,
-} from '../../../../../nust-module/src/runtime/lib';
+} from 'nuxt-nust/utils';
 import AuthGuard from '../../guards/Auth.guard';
 
 @Controller('dog', {

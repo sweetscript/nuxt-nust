@@ -1,4 +1,3 @@
-import type { H3Event } from '../../../../../nust-module/src/runtime/lib';
 import {
   Controller,
   Get,
@@ -8,11 +7,14 @@ import {
   Body,
   Param,
   Inject,
-} from '../../../../../nust-module/src/runtime/lib';
+  ApiResponse,
+  ApiProperty,
+} from 'nuxt-nust/utils';
+import type { H3Event } from 'h3';
 import { CreateCatDto } from './dto/CreateCat.dto';
 import { UpdateCatDto } from './dto/UpdateCat.dto';
 import { CatService } from './Cat.service';
-import type { CatEntity } from '~/server/nust/cat/entity/Cat.entity';
+import { CatEntity } from '~/server/nust/cat/entity/Cat.entity';
 
 @Controller('cat')
 export class CatController {
@@ -36,10 +38,16 @@ export class CatController {
 
   // Get one example
   @Get(':id')
+  @ApiResponse({ status: 200, instance: CatEntity })
+  @ApiResponse({ status: 404, description: 'Not Found' })
   findOne(event: H3Event, @Param('id') id: string): CatEntity {
-    return this.catService.findOne(id);
-    // const id = getRouterParam(event, 'id')
-    // return `this action return a cat with ID:${id}`;
+    const cat = this.catService.findOne(Number(id));
+    if (!cat)
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Not Found',
+      });
+    return cat;
   }
 
   @Patch(':id')

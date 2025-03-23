@@ -91,6 +91,12 @@ export default defineNuxtModule<ModuleOptions>({
     ]);
 
     addServerHandler({
+      meta: {
+        openAPI: {
+          summary: 'Nust router',
+          description: 'Nust router',
+        },
+      },
       handler: resolve('./runtime/server/router'),
     });
   },

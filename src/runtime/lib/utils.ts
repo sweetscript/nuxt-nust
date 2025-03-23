@@ -1,7 +1,12 @@
 import 'reflect-metadata';
 import type { NustHandler } from './types';
 import { getMethodMetadata, getPathMetadata } from './decorators';
-import { METADATA_PATH } from './constants';
+import {
+  MD_OAPI_CLASS_SCHEMA,
+  MD_OAPI_PROPERTIES,
+  METADATA_PATH,
+} from './constants';
+import type { SchemaObject } from 'openapi-typescript';
 
 export function controllerToHandlers(key: string, Controller: any) {
   const handlers: NustHandler[] = [];
@@ -63,4 +68,42 @@ export function cleanPlainObject<T = any>(
       obj[key] = plainObj[key];
       return obj;
     }, {} as Partial<T>);
+}
+
+export function convertClassToOpenApiSchema(
+  classType: any,
+): SchemaObject {
+  const cls = new classType();
+  const properties: any = {};
+
+  const keys = Object.getOwnPropertyNames(cls);
+
+  const openApiClsSchema: Record<string, any> =
+    Reflect.getMetadata(MD_OAPI_CLASS_SCHEMA, classType) || {};
+  const openApiClsProperties: Record<string, any> =
+    Reflect.getMetadata(MD_OAPI_PROPERTIES, classType.prototype) ||
+    {};
+
+  const requiredProps: string[] = openApiClsSchema?.required || [];
+
+  keys.forEach((key) => {
+    const { required, ...openAPISchema } =
+      openApiClsProperties[key] ?? {};
+    properties[key] = openApiClsProperties[key]
+      ? openAPISchema
+      : {
+          type: 'string',
+        };
+    if (required) {
+      requiredProps.push(key);
+    }
+  });
+
+  return {
+    type: 'object',
+    properties,
+    required: requiredProps,
+    title: openApiClsSchema?.title || undefined,
+    description: openApiClsSchema?.description || undefined,
+  };
 }

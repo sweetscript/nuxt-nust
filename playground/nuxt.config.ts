@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['../src/module'],
+  modules: ['nuxt-nust', '@scalar/nuxt'],
   devtools: { enabled: true },
   compatibilityDate: '2025-03-10',
   nust: {
@@ -11,5 +11,10 @@ export default defineNuxtConfig({
     experimental: {
       openAPI: true,
     },
+  },
+
+  scalar: {
+    darkMode: true,
+    forceDarkModeState: 'dark',
   },
 });
