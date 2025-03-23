@@ -8,14 +8,10 @@ import {
 import type {
   OperationObject,
   ParameterObject,
-  SchemaObject,
   ComponentsObject,
   PathsObject,
-  ResponsesObject,
 } from 'openapi-typescript';
 import {
-  MD_OAPI_CLASS_SCHEMA,
-  MD_OAPI_PROPERTIES,
   MD_OAPI_RESPONSES,
   METADATA_ROUTE_ARGS,
   RouteParamTypes,

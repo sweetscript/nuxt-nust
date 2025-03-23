@@ -1,7 +1,6 @@
 import type {
   SchemaObject,
   ResponseObject,
-  ResponsesObject,
 } from 'openapi-typescript';
 import {
   MD_OAPI_CLASS_SCHEMA,
@@ -95,3 +94,93 @@ export function ApiResponse(
     );
   };
 }
+
+type SHOptions = Pick<
+  ApiResponseOptions,
+  'content' | 'instance' | 'description'
+>;
+
+// Success shorthand responses decorators
+export const ApiOkResponse = (opts: SHOptions) =>
+  ApiResponse({ status: 200, description: 'OK', ...opts });
+
+export const ApiCreatedResponse = (opts: SHOptions) =>
+  ApiResponse({ status: 201, description: 'Created', ...opts });
+
+export const ApiAcceptedResponse = (opts: SHOptions) =>
+  ApiResponse({ status: 202, description: 'Accepted', ...opts });
+
+export const ApiNoContentResponse = (opts: SHOptions) =>
+  ApiResponse({ status: 204, description: 'No content', ...opts });
+
+// Redirect shorthand responses decorators
+export const ApiMovedPermanentlyResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 301,
+    description: 'Moved permanently',
+    ...opts,
+  });
+
+export const ApiFoundResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 302,
+    description: 'Found',
+    ...opts,
+  });
+
+// Error responses shorthand decorator
+export const ApiBadRequestResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 400,
+    description: 'Bad request',
+    ...opts,
+  });
+
+export const ApiUnauthorizedResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+    ...opts,
+  });
+
+export const ApiForbiddenResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 403,
+    description: 'Forbidden',
+    ...opts,
+  });
+
+export const ApiNotFoundResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 404,
+    description: 'Not found',
+    ...opts,
+  });
+
+export const ApiMethodNotAllowedResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 405,
+    description: 'Method not allowed',
+    ...opts,
+  });
+
+export const ApiNotAcceptableResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 406,
+    description: 'Not acceptable',
+    ...opts,
+  });
+
+export const ApiRequestTimeoutResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 408,
+    description: 'Request timeout',
+    ...opts,
+  });
+
+export const ApiConflictResponse = (opts: SHOptions) =>
+  ApiResponse({
+    status: 409,
+    description: 'Conflict',
+    ...opts,
+  });
