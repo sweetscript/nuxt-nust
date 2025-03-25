@@ -28,10 +28,6 @@
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     },
-    "./module": {
-      "types": "./src/module.ts",
-      "import": "./src/module.ts"
-    },
     "./utils": {
       "types": "./src/runtime/lib/index.ts",
       "import": "./src/runtime/lib/index.ts"
