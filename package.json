@@ -54,7 +54,8 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
-    "docs:dev": "npm run --prefix docs docs:dev"
+    "docs:dev": "npm run --prefix docs docs:dev",
+    "docs:build": "npm run --prefix docs docs:build"
   },
   "dependencies": {
     "@nuxt/kit": "^3.16.0",
