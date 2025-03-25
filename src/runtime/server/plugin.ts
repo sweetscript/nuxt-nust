@@ -18,7 +18,12 @@ import {
 } from '../lib/constants';
 
 // @ts-expect-error
-const controllers = nust_controllers;
+if (!nust_controllers) {
+  console.log('NUST plugin Error: controllers failed to be imported');
+}
+
+// @ts-expect-error
+const controllers = nust_controllers || {};
 
 const convertHandlerToOpenAPIOperation = (
   handler: NustHandler,

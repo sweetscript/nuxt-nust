@@ -86,7 +86,7 @@ export default defineNuxtModule<ModuleOptions>({
       {
         name: 'default',
         as: 'nust_controllers',
-        from: resolve(controllersPath),
+        from: controllersPath,
       },
     ]);
 

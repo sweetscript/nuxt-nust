@@ -9,7 +9,7 @@ if (!nust_controllers) {
   console.log('NUST Error: controllers failed to be imported');
 }
 // @ts-expect-error
-const controllers = nust_controllers ?? [];
+const controllers = nust_controllers ?? {};
 
 // @ts-expect-error
 const config = useRuntimeConfig();

@@ -29,8 +29,8 @@
       "require": "./dist/module.cjs"
     },
     "./module": {
-      "types": "./dist/module.ts",
-      "import": "./dist/module.ts"
+      "types": "./src/module.ts",
+      "import": "./src/module.ts"
     },
     "./utils": {
       "types": "./src/runtime/lib/index.ts",
