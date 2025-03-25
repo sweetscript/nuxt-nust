@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/sweetscript/nuxt-nust.git"
   },
+  "homepage": "https://sweetscript.github.io/nuxt-nust",
   "author": {
     "name": "Majid Kuhail - Sweetscript Ltd",
     "email": "majid@sweetscript.com",

@@ -108,12 +108,9 @@ export default {
 4. Now the endpoint `/api/cat` is available
 
 
-## Decorators
+## Documentation
 
-# Controller decorator
-
-Adding @Controller decorator to your controller class will
-
+https://sweetscript.github.io/nuxt-nust/guide/setup.html
 
 > 🚧 Further Documentation in progress
 
