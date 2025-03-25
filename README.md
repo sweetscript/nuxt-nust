@@ -50,7 +50,7 @@ export default defineNuxtConfig({
 
 ```typescript
 // server/nust/index.ts
-import { type NustControllers } from 'nuxt-nust'
+import { type NustControllers } from 'nuxt-nust/utils'
 
 export default {
   // Here you'll be adding your controller classes
@@ -59,7 +59,20 @@ export default {
 } satisfies NustControllers
 ```
 
-4. That's it! You can now use Nust Module in your Nuxt app ✨
+4. Update the `tsconfig.json` files by adding the following lines:
+
+```json
+{
+  "extends": "../.nuxt/tsconfig.server.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false
+  }
+}
+```
+
+5. That's it! You can now use Nust Module in your Nuxt app ✨
 
 #### Example of adding a controller, lets call this one `CatController`
 

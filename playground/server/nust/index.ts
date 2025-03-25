@@ -1,4 +1,4 @@
-import type { NustControllers } from '../../../../nust-module/src/lib';
+import type { NustControllers } from 'nuxt-nust/utils';
 import { CatController } from '~/server/nust/cat/Cat.controller';
 import { DogController } from '~/server/nust/dog/Dog.controller';
 import { OtherController } from '~/server/nust/other/Other.controller';

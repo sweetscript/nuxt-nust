@@ -27,6 +27,10 @@
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     },
+    "./module": {
+      "types": "./dist/module.ts",
+      "import": "./dist/module.ts"
+    },
     "./utils": {
       "types": "./src/runtime/lib/index.ts",
       "import": "./src/runtime/lib/index.ts"
@@ -49,7 +53,8 @@
     "format": "prettier ./src ./playground --write",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
+    "docs:dev": "npm run --prefix docs docs:dev"
   },
   "dependencies": {
     "@nuxt/kit": "^3.16.0",
