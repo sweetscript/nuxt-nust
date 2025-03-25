@@ -13,7 +13,9 @@ export default createConfigForNuxt({
     src: ['./playground'],
   },
 })
-  .append()
+  .prepend({
+    ignores: ['docs'],
+  })
   .override('nuxt/typescript/rules', {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
