@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Nust"
-  text: Better Nuxt backend  
+  text: Enhanced Nuxt backend  
   tagline: "A Nuxt module that provides NestJS-like features to your Nuxt backend"
   image:
     src: /logo-small.svg
@@ -20,12 +20,12 @@ hero:
       link: https://github.com/sweetscript/nuxt-nust
 
 features:
-  - title: Controllers & Providers
-    details: Organise and structure your server handlers using the standard way as done by most Backend oriented frameworks.
+  - title: Controllers & Decorators
+    details: Organise and structure your server handlers using the standard resource convention used by most Backend frameworks.
   - title: Validation & Transformers
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: Easily validate and transform DTOs using class-validator and class-transformer which the module provides built-in support, similar to the NestJS implementation.
   - title: Better Doc/OpenAPI support
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: Use Api decorators to enhance your scalar/swagger documentation.
 ---
 
 

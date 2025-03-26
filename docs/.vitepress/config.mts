@@ -17,6 +17,11 @@ export default defineConfig({
     },
     siteTitle: false,
 
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Maintained by Majid K - sweetscript.com',
+    },
+
     editLink: {
       pattern:
         'https://github.com/sweetscript/nuxt-nust/edit/master/docs/:path',

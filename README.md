@@ -1,13 +1,11 @@
 # Nust Module for Nuxt
 
-> 🚧 Development in progress, not ready for production
-
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-A Nuxt module that allows [NestJS like](https://docs.nestjs.com/controllers) backend structure in nuxt, powering nuxt backend with features like:
+Nust is a nuxt module that allows [NestJS like](https://docs.nestjs.com/controllers) backend structure in nuxt, Standardizing your backend with CRUD structure,  powering nuxt backend with features like:
 
 - 🎮 &nbsp;Controllers
 - 🖌️ &nbsp;Decorators
@@ -18,8 +16,9 @@ A Nuxt module that allows [NestJS like](https://docs.nestjs.com/controllers) bac
 - 🔒️ &nbsp;Guards
 - 📖️ &nbsp;OpenAPI documentation support, Nestjs like Api documentation decorators for better Swagger and Scalar support
 
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nuxt-nust?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
+[🏀 &nbsp;Online playground](https://stackblitz.com/edit/nuxt-nust-example?file=server%2Fnust%2Fcat%2FCat.controller.ts)
+
+[📖 &nbsp;Documentation](https://sweetscript.github.io/nuxt-nust)
 
 ## Usage
 
@@ -108,17 +107,139 @@ export default {
 4. Now the endpoint `/api/cat` is available
 
 
+## Concept
+
+Turn your server structure from this:
+
+#### From this:
+```
+server/
+├── api/
+│   ├── cat/
+│   │   ├── index.get.ts   //Find all
+│   │   ├── index.post.ts  //Create
+│   │   ├── [id].get.ts    //Find one
+│   │   ├── [id].patch.ts  //Update
+│   │   └── [id].delete.ts //delete
+│   └── dog/
+│       ├── index.get.ts   //Find all
+│       ├── index.post.ts  //Create
+│       ├── [id].get.ts    //Find one
+│       ├── [id].patch.ts  //Update
+│       └── [id].delete.ts //delete
+└── utils/
+    ├── catUtilss.ts
+    └── dogUtils.ts
+```
+
+#### To this:  (Just and example, structure can be however you like)
+```
+server/
+├── nust/
+│   ├── cat/
+│   │   ├── dto/               // For example, you can add your CRUD dto's here
+│   │   │   ├── CreateCat.dto.ts
+│   │   │   └── UpdateCat.dto.ts
+│   │   ├── entity/            // For example, you can add your resource relevent types here
+│   │   ├── cat.controller.ts  // Has all the CRUD methods
+│   │   └── cat.service.ts     // cat service provider, can be used to hold all logic, allowing it to be injected to any controller and reuse the logic
+│   └── dog/
+│   │   ├── dog.controller.ts  // Has all the CRUD methods
+│   │   └── dog.service.ts     // dog service provider
+└── index.ts                   // controllersFile, a file that exports an object of all controllers
+```
+
+If you've worked with other backend focused frameworks you'd find this structure familiar, where the logic for a CRUD resource all sits under one folder/module, helps keep the backend code organised and its logic reusable.
+
+
+### Resource controllers?
+
+Your event handler changes from this:
+
+```typescript
+//index.get.ts
+export default defineEventHandler((event)=>{
+  //...
+  return //
+})
+//index.post.ts
+export default defineEventHandler((event)=>{
+  //...
+  return //
+})
+//[id].get.ts
+export default defineEventHandler((event)=>{
+  //...
+  return //
+})
+//[id].post.ts
+export default defineEventHandler((event)=>{
+  //...
+  return //
+})
+//[id].delete.ts
+export default defineEventHandler((event)=>{
+  //...
+  return //
+})
+```
+
+To this:
+
+```typescript
+import {Controller, Get, Post, Delete, Body, Param} from '#nust'
+
+@Controller('cat') // Prefix can be defind here or you can just add it to each method
+export class CatController {
+  // Get all
+  @Get('')
+  findAll() {
+    //...
+  }
+
+  // POST Create
+  @Post('')
+  create(event: H3Event, @Body(CreateCatDto) dto: CreateCatDto) {
+    //...
+  }
+
+  // Get one
+  @Get(':id')
+  findOne(event: H3Event, @Param('id') id: string): CatEntity {
+    //..
+  }
+
+  @Patch(':id')
+  update(
+    event: H3Event,
+    @Param('id') id: string,
+    @Body(UpdateCatDto) dto: UpdateCatDto,
+  ) {
+    //...
+  }
+
+  @Delete(':id')
+  delete(event: H3Event, @Param('id') id: string) {
+    //...
+  }
+  
+  @Any('get-random-cat')
+  otherNoneStandardCRUDmethod(event: H3Event) {
+    //...
+  }
+}
+```
+
+
 ## Documentation
 
 https://sweetscript.github.io/nuxt-nust/guide/setup.html
-
-> 🚧 Further Documentation in progress
 
 ## Contribution
 
 Contributions are welcome 🙏
 
-<!--<details>
+<details>
   <summary>Local development</summary>
   
   ```bash
@@ -145,7 +266,7 @@ Contributions are welcome 🙏
   npm run release
   ```
 
-</details>-->
+</details>
 
 
 <!-- Badges -->
