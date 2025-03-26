@@ -40,6 +40,7 @@ export default defineConfig({
     sidebar: [
       {
         text: 'Guide',
+        collapsed: false,
         items: [
           { text: 'Overview', link: '/guide/overview' },
           { text: 'Setup', link: '/guide/setup' },
@@ -48,6 +49,7 @@ export default defineConfig({
       },
       {
         text: 'Features',
+        collapsed: false,
         items: [
           { text: 'Controllers', link: '/features/controllers' },
           { text: 'Providers', link: '/features/providers' },
@@ -56,6 +58,7 @@ export default defineConfig({
       },
       {
         text: 'OpenAPI/Docs',
+        collapsed: false,
         items: [
           { text: 'DTOs/Body', link: '/openapi/body' },
           { text: 'Responses', link: '/openapi/responses' },
@@ -63,50 +66,100 @@ export default defineConfig({
       },
       {
         text: 'CLI',
+        collapsed: false,
         items: [{ text: 'CRUD Generator', link: '/cli' }],
       },
       {
         text: 'Reference',
+        collapsed: false,
         items: [
           {
             text: '@Controller',
+            link: '/reference/controller-decorators#@Controller',
           },
           {
             text: 'Route Decorators',
-            link: '/reference/route-decorators',
+            link: '/reference/controller-decorators#RouteDecorators',
+            collapsed: false,
             items: [
-              { text: '@Get' },
-              { text: '@Post' },
-              { text: '@Put' },
-              { text: '@Patch' },
-              { text: '@Delete' },
-              { text: '@Options' },
-              { text: '@Head' },
-              { text: '@Any' },
+              {
+                text: '@Get',
+                link: '/reference/controller-decorators#@Get',
+              },
+              {
+                text: '@Post',
+                link: '/reference/controller-decorators#@Post',
+              },
+              {
+                text: '@Put',
+                link: '/reference/controller-decorators#@Put',
+              },
+              {
+                text: '@Patch',
+                link: '/reference/controller-decorators#@Patch',
+              },
+              {
+                text: '@Delete',
+                link: '/reference/controller-decorators#@Delete',
+              },
+              {
+                text: '@Options',
+                link: '/reference/controller-decorators#@Options',
+              },
+              {
+                text: '@Head',
+                link: '/reference/controller-decorators#@Head',
+              },
+              {
+                text: '@Any',
+                link: '/reference/controller-decorators#@Any',
+              },
             ],
           },
           {
             text: 'Route Parameter Decorators',
             link: '/reference/parameter-decorators',
+            collapsed: false,
             items: [
-              { text: '@Body' },
-              { text: '@RawBody' },
-              { text: '@Param' },
-              { text: '@Query' },
-              { text: '@Ip' },
-              { text: 'createCustomParamDecorator' },
+              {
+                text: '@Param',
+                link: '/reference/parameter-decorators#@Param',
+              },
+              {
+                text: '@Body',
+                link: '/reference/parameter-decorators#@Body',
+              },
+              {
+                text: '@RawBody',
+                link: '/reference/parameter-decorators#@RawBody',
+              },
+              {
+                text: '@Query',
+                link: '/reference/parameter-decorators#@Query',
+              },
+              {
+                text: '@Ip',
+                link: '/reference/parameter-decorators#@Ip',
+              },
+              {
+                text: 'createCustomParamDecorator',
+                link: '/reference/parameter-decorators#@createCustomParamDecorator',
+              },
             ],
           },
           {
             text: 'Provider Decorators',
+            collapsed: false,
             items: [{ text: '@Inject' }],
           },
           {
             text: 'Guard Decorators',
+            collapsed: false,
             items: [{ text: '@UseGuards' }],
           },
           {
             text: 'OpenAPI/Doc Decorators',
+            collapsed: false,
             items: [
               { text: '@ApiSchema' },
               { text: '@ApiProperty' },
@@ -114,6 +167,7 @@ export default defineConfig({
               { text: '@ApiResponse' },
               {
                 text: 'Response Shorthands',
+                collapsed: false,
                 items: [
                   { text: '@ApiOkResponse' },
                   { text: '@ApiCreatedResponse' },
