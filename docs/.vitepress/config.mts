@@ -1,4 +1,9 @@
 import { defineConfig } from 'vitepress';
+import {
+  ApiConflictResponse,
+  Controller,
+  Inject,
+} from '../../src/runtime';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,7 +11,7 @@ export default defineConfig({
   description:
     'A Nuxt module that provides NestJS-like features to your Nuxt backend',
   srcDir: './src',
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/nuxt-nust/favicon.ico' }]],
   base: '/nuxt-nust/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -60,17 +65,76 @@ export default defineConfig({
         text: 'CLI',
         items: [{ text: 'CRUD Generator', link: '/cli' }],
       },
-      /*{
+      {
         text: 'Reference',
         items: [
           {
-            text: 'Controller',
-            link: '/reference/controller',
-            items: [{ text: 'GET' }],
+            text: '@Controller',
           },
-          { text: 'Get', link: '/reference/get' },
+          {
+            text: 'Route Decorators',
+            link: '/reference/route-decorators',
+            items: [
+              { text: '@Get' },
+              { text: '@Post' },
+              { text: '@Put' },
+              { text: '@Patch' },
+              { text: '@Delete' },
+              { text: '@Options' },
+              { text: '@Head' },
+              { text: '@Any' },
+            ],
+          },
+          {
+            text: 'Route Parameter Decorators',
+            link: '/reference/parameter-decorators',
+            items: [
+              { text: '@Body' },
+              { text: '@RawBody' },
+              { text: '@Param' },
+              { text: '@Query' },
+              { text: '@Ip' },
+              { text: 'createCustomParamDecorator' },
+            ],
+          },
+          {
+            text: 'Provider Decorators',
+            items: [{ text: '@Inject' }],
+          },
+          {
+            text: 'Guard Decorators',
+            items: [{ text: '@UseGuards' }],
+          },
+          {
+            text: 'OpenAPI/Doc Decorators',
+            items: [
+              { text: '@ApiSchema' },
+              { text: '@ApiProperty' },
+
+              { text: '@ApiResponse' },
+              {
+                text: 'Response Shorthands',
+                items: [
+                  { text: '@ApiOkResponse' },
+                  { text: '@ApiCreatedResponse' },
+                  { text: '@ApiAcceptedResponse' },
+                  { text: '@ApiNoContentResponse' },
+                  { text: '@ApiMovedPermanentlyResponse' },
+                  { text: '@ApiFoundResponse' },
+                  { text: '@ApiBadRequestResponse' },
+                  { text: '@ApiUnauthorizedResponse' },
+                  { text: '@ApiForbiddenResponse' },
+                  { text: '@ApiNotFoundResponse' },
+                  { text: '@ApiMethodNotAllowedResponse' },
+                  { text: '@ApiNotAcceptableResponse' },
+                  { text: '@ApiRequestTimeoutResponse' },
+                  { text: '@ApiConflictResponse' },
+                ],
+              },
+            ],
+          },
         ],
-      },*/
+      },
     ],
 
     socialLinks: [

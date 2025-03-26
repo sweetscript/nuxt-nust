@@ -205,18 +205,18 @@ html {
     var(--vp-c-pink-2) 50%,
     var(--vp-c-green-3) 50%
   );
-  --vp-home-hero-image-filter: blur(44px);
+  --vp-home-hero-image-filter: blur(44px) opacity(0.5);
 }
 
 @media (min-width: 640px) {
   :root {
-    --vp-home-hero-image-filter: blur(56px);
+    --vp-home-hero-image-filter: blur(56px) opacity(0.5);
   }
 }
 
 @media (min-width: 960px) {
   :root {
-    --vp-home-hero-image-filter: blur(68px);
+    --vp-home-hero-image-filter: blur(68px) opacity(0.5);
   }
 }
 
