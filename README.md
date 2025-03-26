@@ -50,7 +50,7 @@ export default defineNuxtConfig({
 
 ```typescript
 // server/nust/index.ts
-import { type NustControllers } from 'nuxt-nust/utils'
+import { type NustControllers } from '#nust'
 
 export default {
   // Here you'll be adding your controller classes
@@ -79,7 +79,7 @@ export default {
 1.Create a controller file under the nust directory, `server/nust/cat/Cat.controller.ts`
 
 ```typescript
-import { Controller, type H3Event } from 'nuxt-nust'
+import { Controller, type H3Event } from '#nust'
 
 @Controller('cat')
 export class CatController {
@@ -96,7 +96,7 @@ export class CatController {
 
 ```typescript
 // server/nust/index.ts
-import {type NustControllers} from 'nuxt-nust'
+import {type NustControllers} from '#nust'
 import { CatController } from "./cat/Cat.controller";
 
 export default {

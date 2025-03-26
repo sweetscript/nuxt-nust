@@ -2,16 +2,16 @@ import 'reflect-metadata';
 import { createRouter, defineEventHandler, useBase } from 'h3';
 import type { NustHandler } from '../lib';
 import { controllerToHandlers, resolveInjectedArgs } from '../lib';
+// @ts-expect-error
+import { nust_controllers, useRuntimeConfig } from '#imports';
 
 // Controllers auto imported by module
-// @ts-expect-error
 if (!nust_controllers) {
   console.log('NUST Error: controllers failed to be imported');
 }
-// @ts-expect-error
+
 const controllers = nust_controllers ?? {};
 
-// @ts-expect-error
 const config = useRuntimeConfig();
 
 let handlers: NustHandler[] = [];

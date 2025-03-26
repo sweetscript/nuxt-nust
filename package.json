@@ -27,17 +27,12 @@
       "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
-    },
-    "./utils": {
-      "types": "./src/runtime/lib/index.ts",
-      "import": "./src/runtime/lib/index.ts"
     }
   },
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "prepack": "nuxt-module-build build",
@@ -55,7 +50,7 @@
     "docs:build": "npm run --prefix docs docs:build"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.16.0",
+    "@nuxt/kit": "^3.16.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "h3": "^1.15.1",

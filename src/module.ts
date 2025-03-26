@@ -34,6 +34,10 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url);
 
     // _nuxt.options.build.transpile.push('nuxt-nuxt');
+    // Transpile and alias runtime
+    const runtimeDir = resolve('./runtime');
+    _nuxt.options.alias['#nust'] = runtimeDir;
+    _nuxt.options.build.transpile.push(runtimeDir);
 
     const controllersFile = _options.controllersFile?.startsWith('~/')
       ? _options.controllersFile.substring(2)

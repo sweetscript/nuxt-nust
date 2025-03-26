@@ -16,13 +16,13 @@ import {
   METADATA_ROUTE_ARGS,
   RouteParamTypes,
 } from '../lib/constants';
-
 // @ts-expect-error
+import { nust_controllers } from '#imports';
+
 if (!nust_controllers) {
   console.log('NUST plugin Error: controllers failed to be imported');
 }
 
-// @ts-expect-error
 const controllers = nust_controllers || {};
 
 const convertHandlerToOpenAPIOperation = (

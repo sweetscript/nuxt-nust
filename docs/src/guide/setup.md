@@ -25,7 +25,7 @@ export default defineNuxtConfig({
 
 ```typescript
 // server/nust/index.ts
-import { type NustControllers } from 'nuxt-nust/utils'
+import { type NustControllers } from '#nust'
 
 export default {
   // Here you'll be adding your controller classes
