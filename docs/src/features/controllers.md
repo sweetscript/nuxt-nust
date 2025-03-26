@@ -60,7 +60,7 @@ findOne(event: H3Event) {
 }
 ```
 
-The [@Param](/reference/parameter#@Param) decorator can be used to fetch the parameter directly like so
+The [@Param](/reference/parameter-decorators#@Param) decorator can be used to fetch the parameter directly like so
 
 
 ```typescript
@@ -81,7 +81,7 @@ findAll() {
 
 ## Query parameters
 
-You can use the [@Query](/reference/parameter#@Query) decorator to fetch query parameters directly
+You can use the [@Query](/reference/parameter-decorators#@Query) decorator to fetch query parameters directly
 
 ```typescript
 @Get('cat')
@@ -113,14 +113,14 @@ async create(@Body(CreateCatDto) dto: CreateCatDto) {
 }
 ```
 
-The [@Body](/reference/parameter#@Body) decorator will handle validation of class-validator decorators set in the DTO, and it will also preform a class-transformer plainToInstance. 
+The [@Body](/reference/parameter-decorators#@Body) decorator will handle validation of class-validator decorators set in the DTO, and it will also preform a class-transformer plainToInstance. 
 
-You can use the [@RawBody](/reference/parameter#@RawBody) decorator to return the payload without validaton or transformation.
+You can use the [@RawBody](/reference/parameter-decorators#@RawBody) decorator to return the payload without validaton or transformation.
 
 
 ### Custom parameter decorators
 
-You can create your own paramter decorators by utilising the [createCustomParamDecorator](/reference/parameter#createCustomParamDecorator) function like so:
+You can create your own paramter decorators by utilising the [createCustomParamDecorator](/reference/parameter-decorators#createCustomParamDecorator) function like so:
 
 ```typescript
 export default function MyCustomDecorator() {
