@@ -8,7 +8,7 @@ import {
   Param,
   Inject,
   ApiResponse,
-} from 'nuxt-nust/utils';
+} from '#nust';
 import type { H3Event } from 'h3';
 import { CreateCatDto } from './dto/CreateCat.dto';
 import { UpdateCatDto } from './dto/UpdateCat.dto';

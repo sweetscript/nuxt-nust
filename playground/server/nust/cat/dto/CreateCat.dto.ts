@@ -1,5 +1,5 @@
 import { IsString, IsInt } from 'class-validator';
-import { ApiProperty, ApiSchema } from 'nuxt-nust/utils';
+import { ApiProperty, ApiSchema } from '#nust';
 
 @ApiSchema({ title: 'CreateCatDto' })
 export class CreateCatDto {

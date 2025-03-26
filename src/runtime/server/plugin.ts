@@ -168,8 +168,14 @@ export default defineNitroPlugin((nitro) => {
       return;
     }
 
+    const _existingPaths: any = (response.body as any)?.paths ?? {};
+    // Remove empty path caused by the custom nust router
+    if (_existingPaths['']) {
+      delete _existingPaths[''];
+    }
+
     (response.body as any).paths = {
-      ...((response.body as any)?.paths ?? {}),
+      ..._existingPaths,
       ...nustPaths,
     };
 

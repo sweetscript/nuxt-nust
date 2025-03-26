@@ -1,9 +1,4 @@
 import { defineConfig } from 'vitepress';
-import {
-  ApiConflictResponse,
-  Controller,
-  Inject,
-} from '../../src/runtime';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

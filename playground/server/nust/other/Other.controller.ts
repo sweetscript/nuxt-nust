@@ -1,11 +1,4 @@
-import {
-  Controller,
-  All,
-  Get,
-  UseGuards,
-  Ip,
-  Query,
-} from 'nuxt-nust/utils';
+import { Controller, All, Get, UseGuards, Ip, Query } from '#nust';
 import AuthGuard from '~/server/guards/Auth.guard';
 import type { H3Event } from 'h3';
 import Method from '~/server/decorators/Method.decorator';

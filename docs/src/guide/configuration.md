@@ -15,17 +15,21 @@ export default defineNuxtConfig({
 
 ## Options
 
-| Option                       | Type      | Default | Description                                                                               |
-|------------------------------|-----------|---------|-------------------------------------------------------------------------------------------|
-| `controllersFile`            | `string`  | --      | // Path to controllers export file in your project relative to root folder, for example: `~/server/nust/index.ts` |
-| `debug`                      | `boolean` | `false` | Enables debug logging of routes created by the controllers                                |
-| `autoPrependEvent` (Planned) | `boolean` | `true`  | If enabled, will pass the H3Event as the first argument in all controller route methods   |
+| Option                       | Type      | Default | Description                                                                                                               |
+|------------------------------|-----------|---------|---------------------------------------------------------------------------------------------------------------------------|
+| `controllersFile`            | `string`  | --      | // Path to controllers export file in your project relative to root folder, for example: `~/server/nust/index.ts`         |
+| `debug`                      | `boolean` | `false` | Enables debug logging of routes created by the controllers                                                                |
+| `autoPrependEvent` (Planned) | `boolean` | `true`  | If enabled, will pass the H3Event as the first argument in all controller route methods                                   |
+| `openApiTag` (Planned)       | `string`  | null   | If set, the routes will no longer be tagged by thier controller key and instead all nust routes will be tagged by set tag |
 
 
+### `controllersFile`
 
-## Controllers File
+The controllers file should return an object of all controllers, each controller having its unique key.
 
-The controllers file should return an object of all controllers, each controller having its unique key
+:::tip
+Controllers file should sit under the `server` directory and ideally all controllers should be underneath the same directory holding the controllersFile
+:::
 
 Example: 
 
@@ -41,3 +45,25 @@ export default {
   dog: DogController,
 } satisfies NustControllers
 ```
+
+## `debug`
+
+Enabled this if you wish to see all the server handlers that were added by the nust module in your nuxt logs, like so:
+
+```
+ℹ Vite client warmed up in 6ms
+Nust route added:  GET /cat -> findAll
+Nust route added:  POST /cat -> create
+Nust route added:  GET /cat/:id -> findOne
+Nust route added:  PATCH /cat/:id -> update
+Nust route added:  DELETE /cat/:id -> delete
+ℹ Vite server warmed up in 924ms 
+```
+
+## `autoPrependEvent`
+
+<Badge type="warning">Planned work</Badge>
+
+## `openApiTag`
+
+<Badge type="warning">Planned work</Badge>
