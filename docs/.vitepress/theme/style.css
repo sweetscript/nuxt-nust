@@ -224,3 +224,19 @@ html {
     font-size: 48px;
   }
 }
+
+.dark{
+  --vp-c-bg: #020618;
+  --vp-c-bg-alt: #0f172b;/*#161618;*/
+  --vp-c-bg-elv: #0f172b;/*#202127;*/
+  --vp-c-bg-soft: #1d293d;/*#202127;*/
+}
+
+.VPNavBar:not(.has-sidebar):not(.home.top){
+  background-color: rgba(255,255,255, 0.75) !important;
+  backdrop-filter: blur(10px);
+}
+.dark .VPNavBar:not(.has-sidebar):not(.home.top){
+  background-color: rgba(2, 6, 24, 0.75) !important;
+  backdrop-filter: blur(10px);
+}

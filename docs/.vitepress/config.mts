@@ -19,7 +19,7 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Maintained by Majid K - sweetscript.com',
+      copyright: 'Maintained by Majid K - majid@sweetscript.com',
     },
 
     editLink: {
