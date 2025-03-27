@@ -118,7 +118,7 @@ The [@Body](/reference/parameter-decorators#@Body) decorator will handle validat
 You can use the [@RawBody](/reference/parameter-decorators#@RawBody) decorator to return the payload without validaton or transformation.
 
 
-### Custom parameter decorators
+## Custom parameter decorators
 
 You can create your own paramter decorators by utilising the [createCustomParamDecorator](/reference/parameter-decorators#createCustomParamDecorator) function like so:
 

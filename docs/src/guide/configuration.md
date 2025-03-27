@@ -23,7 +23,7 @@ export default defineNuxtConfig({
 | `openApiTag` (Planned)       | `string`  | null   | If set, the routes will no longer be tagged by thier controller key and instead all nust routes will be tagged by set tag |
 
 
-### `controllersFile`
+## `controllersFile`
 
 The controllers file should return an object of all controllers, each controller having its unique key.
 

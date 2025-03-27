@@ -54,6 +54,8 @@ export default defineConfig({
           { text: 'Controllers', link: '/features/controllers' },
           { text: 'Providers', link: '/features/providers' },
           { text: 'Guards', link: '/features/guards' },
+          { text: 'Validation', link: '/features/validation' },
+          { text: 'Serialization', link: '/features/serialization' },
         ],
       },
       {
@@ -149,13 +151,25 @@ export default defineConfig({
           },
           {
             text: 'Provider Decorators',
+            link: '/reference/provider-decorators',
             collapsed: false,
-            items: [{ text: '@Inject' }],
+            items: [
+              {
+                text: '@Inject',
+                link: '/reference/provider-decorators#@Inject',
+              },
+            ],
           },
           {
             text: 'Guard Decorators',
             collapsed: false,
-            items: [{ text: '@UseGuards' }],
+            link: '/reference/guard-decorators',
+            items: [
+              {
+                text: '@UseGuards',
+                link: '/reference/guard-decorators#@UseGuards',
+              },
+            ],
           },
           {
             text: 'OpenAPI/Doc Decorators',

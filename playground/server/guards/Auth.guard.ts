@@ -1,4 +1,4 @@
-import type { NustGuard } from '../../../src/runtime/lib';
+import type { NustGuard } from '#nust';
 import type { H3Event } from 'h3';
 
 export default class AuthGuard implements NustGuard {

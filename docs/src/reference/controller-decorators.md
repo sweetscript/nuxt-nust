@@ -1,6 +1,6 @@
 # Controller decorators
 
-### `@Controller` {#@Controller}
+## `@Controller` {#@Controller}
 
 Decorator to declare a class as a controller class
 
@@ -22,7 +22,7 @@ Decorator to declare a class as a controller class
 
 ## Route Decorators {#RouteDecorators}
 
-### `@Get` {#@Get}
+## `@Get` {#@Get}
 
 Decorator to declare a GET method route server handler
 
@@ -40,7 +40,7 @@ Decorator to declare a GET method route server handler
 
 ---
 
-### `@Post` {#@Post}
+## `@Post` {#@Post}
 
 Decorator to declare a POST method route server handler
 
@@ -58,7 +58,7 @@ Decorator to declare a POST method route server handler
 
 ---
 
-### `@Put` {#@Put}
+## `@Put` {#@Put}
 
 Decorator to declare a PUT method route server handler
 
@@ -76,7 +76,7 @@ Decorator to declare a PUT method route server handler
 
 ---
 
-### `@Patch` {#@Patch}
+## `@Patch` {#@Patch}
 
 Decorator to declare a PATCH method route server handler
 
@@ -94,7 +94,7 @@ Decorator to declare a PATCH method route server handler
 
 ---
 
-### `@Delete` {#@Delete}
+## `@Delete` {#@Delete}
 
 Decorator to declare a DELETE method route server handler
 
@@ -112,7 +112,7 @@ Decorator to declare a DELETE method route server handler
 
 ---
 
-### `@Options` {#@Options}
+## `@Options` {#@Options}
 
 Decorator to declare a OPTIONS method route server handler
 
@@ -130,7 +130,7 @@ Decorator to declare a OPTIONS method route server handler
 
 ---
 
-### `@Head` {#@Head}
+## `@Head` {#@Head}
 
 Decorator to declare a HEAD method route server handler
 
@@ -148,7 +148,7 @@ Decorator to declare a HEAD method route server handler
 
 ---
 
-### `@Any` {#@Any}
+## `@Any` {#@Any}
 
 Decorator to declare a method route server handler that will catch all request methods
 
