@@ -240,3 +240,7 @@ html {
   background-color: rgba(2, 6, 24, 0.75) !important;
   backdrop-filter: blur(10px);
 }
+
+.vp-doc div[class*='language-']{
+  --vp-code-block-bg: #1d293d;
+}

@@ -8,6 +8,11 @@ export default defineConfig({
   srcDir: './src',
   head: [['link', { rel: 'icon', href: '/nuxt-nust/favicon.ico' }]],
   base: '/nuxt-nust/',
+
+  markdown: {
+    theme: 'material-theme',
+  },
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: {

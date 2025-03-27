@@ -18,7 +18,8 @@ Nust is a nuxt module that allows [NestJS like](https://docs.nestjs.com/controll
 Turn your server structure from this:
 
 #### From this:
-```
+
+```js
 server/
 ├── api/
 │   ├── cat/
@@ -39,7 +40,8 @@ server/
 ```
 
 #### To this:  (Just and example, structure can be however you like)
-```
+
+```js
 server/
 ├── nust/
 │   ├── cat/
