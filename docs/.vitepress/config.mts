@@ -179,29 +179,81 @@ export default defineConfig({
           {
             text: 'OpenAPI/Doc Decorators',
             collapsed: false,
+            link: '/reference/openapi',
             items: [
-              { text: '@ApiSchema' },
-              { text: '@ApiProperty' },
+              {
+                text: '@ApiSchema',
+                link: '/reference/openapi#@ApiSchema',
+              },
+              {
+                text: '@ApiProperty',
+                link: '/reference/openapi#@ApiProperty',
+              },
 
-              { text: '@ApiResponse' },
+              {
+                text: '@ApiResponse',
+                link: '/reference/openapi#@ApiResponse',
+              },
               {
                 text: 'Response Shorthands',
                 collapsed: false,
                 items: [
-                  { text: '@ApiOkResponse' },
-                  { text: '@ApiCreatedResponse' },
-                  { text: '@ApiAcceptedResponse' },
-                  { text: '@ApiNoContentResponse' },
-                  { text: '@ApiMovedPermanentlyResponse' },
-                  { text: '@ApiFoundResponse' },
-                  { text: '@ApiBadRequestResponse' },
-                  { text: '@ApiUnauthorizedResponse' },
-                  { text: '@ApiForbiddenResponse' },
-                  { text: '@ApiNotFoundResponse' },
-                  { text: '@ApiMethodNotAllowedResponse' },
-                  { text: '@ApiNotAcceptableResponse' },
-                  { text: '@ApiRequestTimeoutResponse' },
-                  { text: '@ApiConflictResponse' },
+                  {
+                    text: '@ApiOkResponse',
+                    link: '/reference/openapi#@ApiOkResponse',
+                  },
+                  {
+                    text: '@ApiCreatedResponse',
+                    link: '/reference/openapi#@ApiCreatedResponse',
+                  },
+                  {
+                    text: '@ApiAcceptedResponse',
+                    link: '/reference/openapi#@ApiAcceptedResponse',
+                  },
+                  {
+                    text: '@ApiNoContentResponse',
+                    link: '/reference/openapi#@ApiNoContentResponse',
+                  },
+                  {
+                    text: '@ApiMovedPermanentlyResponse',
+                    link: '/reference/openapi#@ApiMovedPermanentlyResponse',
+                  },
+                  {
+                    text: '@ApiFoundResponse',
+                    link: '/reference/openapi#@ApiFoundResponse',
+                  },
+                  {
+                    text: '@ApiBadRequestResponse',
+                    link: '/reference/openapi#@ApiBadRequestResponse',
+                  },
+                  {
+                    text: '@ApiUnauthorizedResponse',
+                    link: '/reference/openapi#@ApiUnauthorizedResponse',
+                  },
+                  {
+                    text: '@ApiForbiddenResponse',
+                    link: '/reference/openapi#@ApiForbiddenResponse',
+                  },
+                  {
+                    text: '@ApiNotFoundResponse',
+                    link: '/reference/openapi#@ApiNotFoundResponse',
+                  },
+                  {
+                    text: '@ApiMethodNotAllowedResponse',
+                    link: '/reference/openapi#@ApiMethodNotAllowedResponse',
+                  },
+                  {
+                    text: '@ApiNotAcceptableResponse',
+                    link: '/reference/openapi#@ApiNotAcceptableResponse',
+                  },
+                  {
+                    text: '@ApiRequestTimeoutResponse',
+                    link: '/reference/openapi#@ApiRequestTimeoutResponse',
+                  },
+                  {
+                    text: '@ApiConflictResponse',
+                    link: '/reference/openapi#@ApiConflictResponse',
+                  },
                 ],
               },
             ],
