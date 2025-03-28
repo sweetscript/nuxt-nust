@@ -44,10 +44,12 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: npm ci # or pnpm install / yarn install / bun install
+        run: npm ci
         working-directory: docs
       - name: Build with VitePress
-        run: npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
+        run: |
+          export VITE_CF_TOKEN=$VITE_CF_TOKEN
+          npm run docs:build
         working-directory: docs
         env:
           VITE_CF_TOKEN: ${{ vars.CF_TOKEN }}
