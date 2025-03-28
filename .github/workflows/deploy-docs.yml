@@ -27,6 +27,7 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,10 +48,9 @@ jobs:
         run: npm ci
         working-directory: docs
       - name: Build with VitePress
-        run: |
-          export VITE_CF_TOKEN=${{ vars.CF_TOKEN }}
-          echo VITE_CF_TOKEN
-          npm run docs:build
+        env:
+          VITE_CF_TOKEN: ${{ vars.CF_TOKEN }}
+        run: npm run docs:build
         working-directory: docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
