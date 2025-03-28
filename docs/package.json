@@ -1,7 +1,7 @@
 {
   "scripts": {
     "docs:dev": "vitepress dev",
-    "docs:build": "VITE_CF_TOKEN=test vitepress build",
+    "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
