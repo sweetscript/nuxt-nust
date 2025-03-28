@@ -49,6 +49,7 @@ jobs:
       - name: Build with VitePress
         run: |
           export VITE_CF_TOKEN=${{ vars.CF_TOKEN }}
+          echo VITE_CF_TOKEN
           npm run docs:build
         working-directory: docs
       - name: Upload artifact
