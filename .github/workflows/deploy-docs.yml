@@ -48,11 +48,9 @@ jobs:
         working-directory: docs
       - name: Build with VitePress
         run: |
-          export VITE_CF_TOKEN=$VITE_CF_TOKEN
+          export VITE_CF_TOKEN=${{ vars.CF_TOKEN }}
           npm run docs:build
         working-directory: docs
-        env:
-          VITE_CF_TOKEN: ${{ vars.CF_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
