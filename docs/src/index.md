@@ -27,8 +27,3 @@ features:
   - title: Better Doc/OpenAPI support
     details: Use Api decorators to enhance your scalar/swagger documentation.
 ---
-
-
-::: warning
-Still in development, Contributions are welcome
-:::
