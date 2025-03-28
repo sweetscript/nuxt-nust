@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress';
 
-const cfToken = process.env.VITE_CF_TOKEN;
+const cfToken = import.meta.env?.VITE_CF_TOKEN;
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
