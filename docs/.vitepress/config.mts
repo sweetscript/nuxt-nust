@@ -1,12 +1,28 @@
 import { defineConfig } from 'vitepress';
 
+const cfToken = process.env.VITE_CF_TOKEN;
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Nust',
   description:
     'A Nuxt module that provides NestJS-like features to your Nuxt backend',
   srcDir: './src',
-  head: [['link', { rel: 'icon', href: '/nuxt-nust/favicon.ico' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/nuxt-nust/favicon.ico' }],
+    ...(cfToken
+      ? [
+          [
+            'script',
+            {
+              src: 'https://static.cloudflareinsights.com/beacon.min.js',
+              defer: 'true',
+              'data-cf-beacon': `{'token': '${cfToken}'}`,
+            },
+          ],
+        ]
+      : []),
+  ],
   base: '/nuxt-nust/',
 
   markdown: {
