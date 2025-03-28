@@ -19,9 +19,8 @@ export default defineConfig({
           [
             'script',
             {
-              src: 'https://static.cloudflareinsights.com/beacon.min.js',
+              src: `https://static.cloudflareinsights.com/beacon.min.js?token=${cfToken}`,
               defer: 'true',
-              'data-cf-beacon': `{'token': '${cfToken}'}`,
             },
           ],
         ]
