@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress';
 
-const cfToken = import.meta.env?.VITE_CF_TOKEN;
+const cfToken = process.env.VITE_CF_TOKEN;
+console.log('cfToken', cfToken);
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -8,6 +9,9 @@ export default defineConfig({
   description:
     'A Nuxt module that provides NestJS-like features to your Nuxt backend',
   srcDir: './src',
+  vite: {
+    envPrefix: 'VITE_',
+  },
   head: [
     ['link', { rel: 'icon', href: '/nuxt-nust/favicon.ico' }],
     ...(cfToken
