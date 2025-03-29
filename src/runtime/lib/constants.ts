@@ -25,8 +25,8 @@ export enum RouteParamTypes {
   PARAM = 'param',
   QUERY = 'query',
   IP = 'ip',
-  CUSTOM = 'custom',
+  EVENT = 'event',
   // FILE = 'file',
   // FILES = 'files',
-  // HOST = 'host,
+  CUSTOM = 'custom',
 }

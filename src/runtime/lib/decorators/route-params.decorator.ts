@@ -76,6 +76,16 @@ export function Ip(
   );
 }
 
+export function Event(
+  property?: string,
+  ...pipes: PipeType[]
+): ParameterDecorator {
+  return createRouteParamDecorator(RouteParamTypes.EVENT)(
+    property,
+    ...pipes,
+  );
+}
+
 export const createCustomParamDecorator =
   (handler: (event: H3Event) => any): ParameterDecorator =>
   (target, methodName, index) => {

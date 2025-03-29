@@ -17,13 +17,15 @@ import {
   RouteParamTypes,
 } from '../lib/constants';
 // @ts-expect-error
-import { nust_controllers } from '#imports';
+import { nust_controllers, useRuntimeConfig } from '#imports';
 
 if (!nust_controllers) {
   console.log('NUST plugin Error: controllers failed to be imported');
 }
 
 const controllers = nust_controllers || {};
+
+const config = useRuntimeConfig();
 
 const convertHandlerToOpenAPIOperation = (
   handler: NustHandler,
@@ -58,7 +60,9 @@ const convertHandlerToOpenAPIOperation = (
     .join('/');
 
   const operation = {
-    tags: [handler.controllerKey],
+    tags: config.nust?.openApiTag
+      ? [config.nust.openApiTag]
+      : [handler.controllerKey],
     parameters: [...parameters],
 
     responses: {

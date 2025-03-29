@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   nust: {
     controllersFile: '~/server/nust/index.ts',
     debug: true,
+    openApiTag: 'Nust routes',
   },
 
   nitro: {

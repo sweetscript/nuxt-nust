@@ -11,6 +11,7 @@ declare module '@nuxt/schema' {
   interface RuntimeConfig {
     nust: {
       debug?: boolean;
+      openApiTag?: string | null;
     };
   }
 }
@@ -19,6 +20,7 @@ declare module '@nuxt/schema' {
 export interface ModuleOptions {
   debug?: boolean;
   controllersFile: string;
+  openApiTag?: string | null;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -82,6 +84,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     _nuxt.options.runtimeConfig.nust = {
       debug: _options.debug,
+      openApiTag: _options.openApiTag,
     };
 
     addServerPlugin(resolve('./runtime/server/plugin'));

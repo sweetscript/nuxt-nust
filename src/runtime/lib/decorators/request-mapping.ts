@@ -92,7 +92,9 @@ export const RequestMapping =
         for (const param of params) {
           const { index, type, data, meta } = param;
 
-          if (type === RouteParamTypes.RAW_BODY) {
+          if (type === RouteParamTypes.EVENT) {
+            args[index] = event;
+          } else if (type === RouteParamTypes.RAW_BODY) {
             args[index] = await readBody(event);
           } else if (type === RouteParamTypes.BODY) {
             const body = await readBody(event);

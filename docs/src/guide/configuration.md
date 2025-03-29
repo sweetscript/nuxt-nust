@@ -20,7 +20,7 @@ export default defineNuxtConfig({
 | `controllersFile`            | `string`  | --      | // Path to controllers export file in your project relative to root folder, for example: `~/server/nust/index.ts`         |
 | `debug`                      | `boolean` | `false` | Enables debug logging of routes created by the controllers                                                                |
 | `autoPrependEvent` (Planned) | `boolean` | `true`  | If enabled, will pass the H3Event as the first argument in all controller route methods                                   |
-| `openApiTag` (Planned)       | `string`  | null   | If set, the routes will no longer be tagged by thier controller key and instead all nust routes will be tagged by set tag |
+| `openApiTag`      | `string`  | null   | If set, the routes will no longer be tagged by thier controller key and instead all nust routes will be tagged by set tag |
 
 
 ## `controllersFile`
@@ -66,4 +66,4 @@ Nust route added:  DELETE /cat/:id -> delete
 
 ## `openApiTag`
 
-<Badge type="warning">Planned work</Badge>
+Nust module will assign the controller key as the openapi tag for its routes, however you can assign a custom tag for all nust routes using `openApiTag` config
