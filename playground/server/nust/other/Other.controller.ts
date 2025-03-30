@@ -1,6 +1,5 @@
 import { Controller, All, Get, UseGuards, Ip, Query } from '#nust';
 import AuthGuard from '~/server/guards/Auth.guard';
-import type { H3Event } from 'h3';
 import Method from '~/server/decorators/Method.decorator';
 
 @Controller()
@@ -23,11 +22,7 @@ export class OtherController {
   }
 
   @Get('ip-address')
-  getIpAddress(
-    _event: H3Event,
-    @Ip() ip: string,
-    @Query('id') id: string,
-  ) {
+  getIpAddress(@Ip() ip: string, @Query('id') id: string) {
     return {
       ip: ip,
       query: {
@@ -37,7 +32,7 @@ export class OtherController {
   }
 
   @All('custom-param-decorator')
-  customParamDecorator(_event: H3Event, @Method() method: string) {
+  customParamDecorator(@Method() method: string) {
     return {
       method: method,
     };

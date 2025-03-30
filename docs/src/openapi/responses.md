@@ -12,7 +12,7 @@ Example:
 ```typescript
 @Post('')
 @ApiResponse({ status: 200, description: 'OK' })
-create(event: H3Event, @Body(CreateCatDto) dto: CreateCatDto) {
+create(@Body(CreateCatDto) dto: CreateCatDto) {
   // logic here
 }
 ```
@@ -26,7 +26,7 @@ You can use the instance property to define the class/dto type returned by the a
 @Get(':id')
 @ApiResponse({ status: 200, instance: CatEntity })
 @ApiResponse({ status: 404, description: 'Cat not found' })
-findOne(event: H3Event, @Param('id') id: string) {
+findOne(@Param('id') id: string) {
   return this.catService.findOne(Number(id));
 }
 ```
@@ -44,7 +44,7 @@ import {UseGuards} from "./guard.decorator";
 @ApiOkResponse() // to cover success response
 @ApiBadRequestResponse() // to cover validation error response that might be retuned by @Body
 @ApiForbiddenResponse() // to cover auth error response returned by AuthGuard
-create(event: H3Event, @Body(CreateCatDto) dto: CreateCatDto) {
+create(@Body(CreateCatDto) dto: CreateCatDto) {
   // logic here
 }
 ```

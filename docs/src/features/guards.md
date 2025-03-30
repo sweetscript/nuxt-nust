@@ -23,7 +23,7 @@ export default class AuthGuard implements NustGuard {
     this.roles = roles;
   }
 
-  authorize(_event: H3Event) {
+  authorize(event: H3Event) {
     // Logic to check if user is logged in here
     // Logic to check if user role is one of the ones passed to the AuthGuard constructor
     return true // boolean whether to go ahead or not

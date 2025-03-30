@@ -95,7 +95,8 @@ export default defineEventHandler((event)=>{
 To this:
 
 ```typescript
-import { Controller, Get, Post, Delete, Body, Param } from '#nust'
+import {Controller, Get, Post, Delete, Body, Param} from '#nust'
+import {EventObject} from "./route-params.decorator";
 
 @Controller('cat') // Prefix can be defind here or you can just add it to each method
 export class CatController {
@@ -107,32 +108,31 @@ export class CatController {
 
   // POST Create
   @Post('')
-  create(event: H3Event, @Body(CreateCatDto) dto: CreateCatDto) {
+  create(@Body(CreateCatDto) dto: CreateCatDto) {
     //...
   }
 
   // Get one
   @Get(':id')
-  findOne(event: H3Event, @Param('id') id: string): CatEntity {
+  findOne(@Param('id') id: string): CatEntity {
     //..
   }
 
   @Patch(':id')
   update(
-    event: H3Event,
     @Param('id') id: string,
-    @Body(UpdateCatDto) dto: UpdateCatDto,
+    @Body(UpdateCatDto) dto: UpdateCatDto
   ) {
     //...
   }
 
   @Delete(':id')
-  delete(event: H3Event, @Param('id') id: string) {
+  delete(@Param('id') id: string) {
     //...
   }
-  
+
   @Any('get-random-cat')
-  otherNoneStandardCRUDmethod(event: H3Event) {
+  otherNoneStandardCRUDmethod() {
     //...
   }
 }

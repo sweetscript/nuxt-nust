@@ -7,6 +7,7 @@ import {
   Body,
   Param,
   Inject,
+  EventObject,
   ApiResponse,
 } from '#nust';
 import type { H3Event } from 'h3';
@@ -30,8 +31,12 @@ export class CatController {
 
   // POST Create example
   @Post('')
-  create(event: H3Event, @Body(CreateCatDto) dto: CreateCatDto) {
+  create(
+    @Body(CreateCatDto) dto: CreateCatDto,
+    @EventObject() event: H3Event,
+  ) {
     console.log('dto', dto);
+    console.log('event', event.path);
     return 'this action adds a new cat';
   }
 
@@ -39,7 +44,7 @@ export class CatController {
   @Get(':id')
   @ApiResponse({ status: 200, instance: CatEntity })
   @ApiResponse({ status: 404, description: 'Not Found' })
-  findOne(event: H3Event, @Param('id') id: string): CatEntity {
+  findOne(@Param('id') id: string): CatEntity {
     const cat = this.catService.findOne(Number(id));
     if (!cat)
       throw createError({
@@ -51,7 +56,6 @@ export class CatController {
 
   @Patch(':id')
   update(
-    event: H3Event,
     @Param('id') id: string,
     @Body(UpdateCatDto) dto: UpdateCatDto,
   ) {
@@ -60,7 +64,7 @@ export class CatController {
   }
 
   @Delete(':id')
-  delete(event: H3Event, @Param('id') id: string) {
+  delete(@Param('id') id: string) {
     return `this action deletes a cat with ID:${id}`;
   }
 }

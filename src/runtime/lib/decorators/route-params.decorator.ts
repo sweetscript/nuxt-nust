@@ -76,7 +76,7 @@ export function Ip(
   );
 }
 
-export function Event(
+export function EventObject(
   property?: string,
   ...pipes: PipeType[]
 ): ParameterDecorator {
