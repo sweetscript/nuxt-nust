@@ -1,6 +1,6 @@
 {
   "name": "nuxt-nust",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Nestjs-like api controllers for your Nuxt backend",
   "repository": {
     "type": "git",
