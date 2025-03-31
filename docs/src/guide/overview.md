@@ -1,9 +1,5 @@
 # Overview
 
-::: warning
-Still in beta, Contributions are welcome
-:::
-
 Nust is a nuxt module that allows [NestJS like](https://docs.nestjs.com/controllers) backend structure in nuxt, Standardizing your backend with CRUD structure,  powering nuxt backend with features like:
 
 - 🎮 &nbsp;Controllers

@@ -1,4 +1,4 @@
-import { createCustomParamDecorator } from '../../../src/runtime/lib';
+import { createCustomParamDecorator } from '#nust';
 
 /**
  * Example of custom parameter decorator
