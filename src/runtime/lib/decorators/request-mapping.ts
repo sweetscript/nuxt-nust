@@ -139,7 +139,7 @@ export const RequestMapping =
               : event.node.req.socket.remoteAddress;
           } else if (type === RouteParamTypes.CUSTOM) {
             if (meta?.handler) {
-              args[index] = meta.handler(event);
+              args[index] = await meta.handler(event);
             }
           }
         }
