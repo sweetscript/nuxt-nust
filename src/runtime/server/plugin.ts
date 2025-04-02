@@ -138,12 +138,17 @@ const convertHandlerToOpenAPIOperation = (
     });
   }
 
-  const routeGuards: Array<NustGuard | typeof NustGuard> =
+  console.log('__guards', controller.prototype.__guards);
+  let routeGuards: Array<NustGuard | typeof NustGuard> =
     Reflect.getMetadata(
       METADATA_ROUTE_GUARDS,
       controller.prototype,
       handler.fn,
     ) || [];
+
+  if (controller.prototype.__guards) {
+    routeGuards = [...routeGuards, ...controller.prototype.__guards];
+  }
 
   if (routeGuards.length > 0) {
     for (const guardCls of routeGuards) {

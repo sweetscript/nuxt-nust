@@ -1,8 +1,5 @@
 import { createError, type H3Error, type H3Event } from 'h3';
-import type {
-  OperationObject,
-  ServerObject,
-} from 'openapi-typescript';
+import type { ServerObject } from 'openapi-typescript';
 import { METADATA_ROUTE_GUARDS } from '../constants';
 
 export abstract class NustGuard {

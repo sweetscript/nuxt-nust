@@ -23,31 +23,31 @@ export default class AuthGuard implements NustGuard {
   openApiMeta() {
     return {
       components: {
-        // securitySchemes: {
-        //   bearerAuth: {
-        //     type: 'http',
-        //     scheme: 'bearer',
-        //     bearerFormat: 'JWT',
-        //   },
-        // },
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
       },
       operation: {
-        // security: [
-        //   {
-        //     bearerAuth: [],
-        //   },
-        // ],
-        parameters: [
+        security: [
           {
-            in: 'header',
-            name: 'Authorization',
-            required: true,
-            schema: {
-              type: 'string',
-              default: 'Bearer {{access_token}}',
-            },
+            bearerAuth: [],
           },
         ],
+        // parameters: [
+        //   {
+        //     in: 'header',
+        //     name: 'Authorization',
+        //     required: true,
+        //     schema: {
+        //       type: 'string',
+        //       default: 'Bearer {{access_token}}',
+        //     },
+        //   },
+        // ],
       },
       serverVariables: {
         access_token: {
