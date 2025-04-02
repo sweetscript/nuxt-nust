@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { defineNitroPlugin } from 'nitropack/runtime';
+import merge from 'deepmerge';
 import type { NustHandler, RouteParamMetadata } from '../lib/types';
 import {
   controllerToHandlers,
@@ -10,14 +11,17 @@ import type {
   ParameterObject,
   ComponentsObject,
   PathsObject,
+  ServerObject,
 } from 'openapi-typescript';
 import {
   MD_OAPI_RESPONSES,
   METADATA_ROUTE_ARGS,
+  METADATA_ROUTE_GUARDS,
   RouteParamTypes,
 } from '../lib/constants';
 // @ts-expect-error
 import { nust_controllers, useRuntimeConfig } from '#imports';
+import type { NustGuard } from '~/src/runtime';
 
 if (!nust_controllers) {
   console.log('NUST plugin Error: controllers failed to be imported');
@@ -33,13 +37,15 @@ const convertHandlerToOpenAPIOperation = (
   path: string;
   operation: OperationObject;
   components: ComponentsObject;
+  serverVariables: ServerObject['variables'];
 } => {
   const url = handler.route;
   const urlParts = url.split('/');
   const parameters: ParameterObject[] = [];
-  const components: ComponentsObject = {
+  let components: ComponentsObject = {
     schemas: {},
   };
+  let serverVariables: ServerObject['variables'] = {};
 
   const path = urlParts
     .map((part) => {
@@ -59,7 +65,7 @@ const convertHandlerToOpenAPIOperation = (
     })
     .join('/');
 
-  const operation = {
+  let operation = {
     tags: config.nust?.openApiTag
       ? [config.nust.openApiTag]
       : [handler.controllerKey],
@@ -132,10 +138,45 @@ const convertHandlerToOpenAPIOperation = (
     });
   }
 
+  const routeGuards: Array<NustGuard | typeof NustGuard> =
+    Reflect.getMetadata(
+      METADATA_ROUTE_GUARDS,
+      controller.prototype,
+      handler.fn,
+    ) || [];
+
+  if (routeGuards.length > 0) {
+    for (const guardCls of routeGuards) {
+      const guard =
+        typeof guardCls === 'object'
+          ? guardCls
+          : // @ts-expect-error
+            new guardCls();
+      const guardMeta = guard.openApiMeta
+        ? guard.openApiMeta()
+        : null;
+      if (guardMeta?.operation) {
+        operation = merge(operation, guardMeta.operation) as never;
+      }
+
+      if (guardMeta?.components) {
+        components = merge(components, guardMeta.components) as never;
+      }
+
+      if (guardMeta?.serverVariables) {
+        serverVariables = merge(
+          serverVariables,
+          guardMeta.serverVariables,
+        ) as never;
+      }
+    }
+  }
+
   return {
     path: path,
     operation,
     components,
+    serverVariables,
   };
 };
 
@@ -145,23 +186,27 @@ Object.entries(controllers).forEach(([key, value]) => {
 });
 
 const nustPaths: PathsObject = {};
-const nustComponents: ComponentsObject = {
+let nustComponents: ComponentsObject = {
   schemas: {},
 };
+let nustServerVariables: ServerObject['variables'] = {};
 for (const handler of handlers) {
   const method = handler.method.toLowerCase();
 
-  const { path, operation, components } =
+  const { path, operation, components, serverVariables } =
     convertHandlerToOpenAPIOperation(handler);
   if (!nustPaths[`/api${path}`]) {
     nustPaths[`/api${path}`] = {};
   }
   nustPaths[`/api${path}`][method as any] = operation;
-  if (components.schemas) {
-    nustComponents.schemas = {
-      ...nustComponents.schemas,
-      ...components.schemas,
-    };
+  if (components) {
+    nustComponents = merge(nustComponents || {}, components) as any;
+  }
+  if (serverVariables) {
+    nustServerVariables = merge(
+      nustServerVariables || {},
+      serverVariables,
+    ) as any;
   }
 }
 
@@ -183,12 +228,17 @@ export default defineNitroPlugin((nitro) => {
       ...nustPaths,
     };
 
-    (response.body as any).components = {
-      ...((response.body as any)?.components ?? {}),
-      schemas: {
-        ...((response.body as any)?.components?.schemas ?? {}),
-        ...nustComponents.schemas,
-      },
-    };
+    (response.body as any).components = merge(
+      (response.body as any)?.components ?? {},
+      nustComponents,
+    );
+    if ((response.body as any).servers) {
+      for (const i in (response.body as any).servers) {
+        (response.body as any).servers[i].variables = merge(
+          (response.body as any).servers[i].variables ?? {},
+          nustServerVariables,
+        );
+      }
+    }
   });
 });
