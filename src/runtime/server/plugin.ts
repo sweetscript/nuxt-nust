@@ -138,7 +138,6 @@ const convertHandlerToOpenAPIOperation = (
     });
   }
 
-  console.log('__guards', controller.prototype.__guards);
   let routeGuards: Array<NustGuard | typeof NustGuard> =
     Reflect.getMetadata(
       METADATA_ROUTE_GUARDS,
