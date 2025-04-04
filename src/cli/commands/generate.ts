@@ -9,6 +9,25 @@ import {
   generateDto,
 } from '../generators';
 
+async function getDefaultPath(): Promise<string> {
+  try {
+    const configPath = join(process.cwd(), 'nuxt.config.ts');
+    const configContent = await fs.readFile(configPath, 'utf-8');
+
+    // Extract the controllersFile path from the config
+    const match = configContent.match(
+      /controllersFile:\s*['"]([^'"]+)['"]/,
+    );
+    if (match) {
+      // Convert the path to the correct format (remove ~/ prefix and convert to relative path)
+      return match[1].replace(/^~\/?/, '').replace('/index.ts', '');
+    }
+  } catch {
+    console.warn('Could not read nuxt.config.ts, using default path');
+  }
+  return 'server/nust';
+}
+
 export function createGenerateCommand(): Command {
   const command = new Command('generate')
     .alias('g')
@@ -21,7 +40,7 @@ export function createGenerateCommand(): Command {
     .option(
       '-p, --path <path>',
       'Path where the files should be generated',
-      'server/nust',
+      '',
     )
     .option(
       '-t, --dto-type <dtoType>',
@@ -34,9 +53,13 @@ export function createGenerateCommand(): Command {
         name: string,
         options: { path: string; dtoType: 'create' | 'update' },
       ) => {
+        const optionsPath =
+          options.path && options.path !== ''
+            ? options.path
+            : await getDefaultPath();
         const basePath = join(
           process.cwd(),
-          options.path,
+          optionsPath,
           name.toLowerCase(),
         );
 
@@ -84,7 +107,7 @@ export function createGenerateCommand(): Command {
             ]);
 
             // Update index.ts for the new controller
-            await updateIndexFile(name, options.path);
+            await updateIndexFile(name, optionsPath);
 
             console.log(
               `✅ Generated resource ${name} with all components in ${basePath}`,
@@ -103,7 +126,7 @@ export function createGenerateCommand(): Command {
               content = generateController(name);
               fileName = `${name.toLowerCase()}.${type}.ts`;
               // Update index.ts for the new controller
-              await updateIndexFile(name, options.path);
+              await updateIndexFile(name, optionsPath);
               break;
             case 'service':
               content = generateService(name);
@@ -156,12 +179,19 @@ async function updateIndexFile(name: string, basePath: string) {
 
     // Add to exports if it doesn't exist
     const exportLine = `  ${name.toLowerCase()}: ${controllerName}Controller,\n`;
-    if (!content.includes(`${name.toLowerCase()}: ${controllerName}Controller`)) {
+    if (
+      !content.includes(
+        `${name.toLowerCase()}: ${controllerName}Controller`,
+      )
+    ) {
       // Find the last closing brace in the exports object
       const lastBraceIndex = content.lastIndexOf('}');
       if (lastBraceIndex !== -1) {
         // Insert the new export line before the last closing brace
-        content = content.slice(0, lastBraceIndex) + exportLine + content.slice(lastBraceIndex);
+        content =
+          content.slice(0, lastBraceIndex) +
+          exportLine +
+          content.slice(lastBraceIndex);
       }
     }
 
