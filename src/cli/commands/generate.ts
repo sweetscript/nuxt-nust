@@ -83,6 +83,9 @@ export function createGenerateCommand(): Command {
               ),
             ]);
 
+            // Update index.ts for the new controller
+            await updateIndexFile(name, options.path);
+
             console.log(
               `✅ Generated resource ${name} with all components in ${basePath}`,
             );
@@ -99,6 +102,8 @@ export function createGenerateCommand(): Command {
             case 'controller':
               content = generateController(name);
               fileName = `${name.toLowerCase()}.${type}.ts`;
+              // Update index.ts for the new controller
+              await updateIndexFile(name, options.path);
               break;
             case 'service':
               content = generateService(name);
@@ -130,4 +135,38 @@ export function createGenerateCommand(): Command {
     );
 
   return command;
+}
+
+async function updateIndexFile(name: string, basePath: string) {
+  const indexPath = join(process.cwd(), basePath, 'index.ts');
+  const controllerName = name.charAt(0).toUpperCase() + name.slice(1);
+  const importPath = `~/${basePath}/${name.toLowerCase()}/${name.toLowerCase()}.controller`;
+
+  try {
+    let content = await fs.readFile(indexPath, 'utf-8');
+
+    // Add import if it doesn't exist
+    if (!content.includes(importPath)) {
+      const importLine = `import { ${controllerName}Controller } from '${importPath}';\n`;
+      content = content.replace(
+        /import type \{ NustControllers \} from '#nust';/,
+        `import type { NustControllers } from '#nust';\n${importLine}`,
+      );
+    }
+
+    // Add to exports if it doesn't exist
+    const exportLine = `  ${name.toLowerCase()}: ${controllerName}Controller,\n`;
+    if (!content.includes(`${name.toLowerCase()}: ${controllerName}Controller`)) {
+      // Find the last closing brace in the exports object
+      const lastBraceIndex = content.lastIndexOf('}');
+      if (lastBraceIndex !== -1) {
+        // Insert the new export line before the last closing brace
+        content = content.slice(0, lastBraceIndex) + exportLine + content.slice(lastBraceIndex);
+      }
+    }
+
+    await fs.writeFile(indexPath, content);
+  } catch (error) {
+    console.error('Error updating index.ts:', error);
+  }
 }
