@@ -7,6 +7,9 @@
     "build": "nuxi build",
     "generate": "nuxi generate"
   },
+  "bin": {
+    "nust": "./node_modules/nuxt-nust/bin/cli.js"
+  },
   "dependencies": {
     "@scalar/nuxt": "^0.3.7",
     "nuxt": "^3.16.0",
