@@ -170,10 +170,10 @@ async function updateIndexFile(name: string, basePath: string) {
 
     // Add import if it doesn't exist
     if (!content.includes(importPath)) {
-      const importLine = `import { ${controllerName}Controller } from '${importPath}';\n`;
+      const importLine = `import { ${controllerName}Controller } from '${importPath}';`;
       content = content.replace(
-        /import type \{ NustControllers \} from '#nust';/,
-        `import type { NustControllers } from '#nust';\n${importLine}`,
+        /\nexport default \{/,
+        `${importLine}\n\nexport default {`,
       );
     }
 

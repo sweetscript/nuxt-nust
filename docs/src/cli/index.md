@@ -43,6 +43,8 @@ for example running `npx nust g resource User` will generate these files:
     └── user.service.ts
 ```
 
+It will also add the controller to your `server/nust/index.ts` list
+
 ## Generate a new controller
 
 ```bash
@@ -65,5 +67,5 @@ npx nust g entity User
 ## Generate a new dto
 
 ```bash
-npx nust g dto User --dtoType=create
+npx nust g dto User --dto-type=create
 ```
